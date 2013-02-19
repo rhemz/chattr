@@ -2,5 +2,5 @@
 
 $config['use_session']	= true;
 
-$config['type']			= 'database';
+$config['type']			= 'file';
 $config['name']			= 'chattr_sess';
