@@ -17,8 +17,16 @@ function __autoload($class)
 		if(stripos($class, ($s = sprintf("_%s", $suffix))) !== false)
 		{
 			$class = str_ireplace($s, '', $class);
-			require_once(APPLICATION_PATH . $path . DIRECTORY_SEPARATOR . $class . PHP_EXT);
-			return;
+			$path = APPLICATION_PATH . $path . DIRECTORY_SEPARATOR;
+
+			foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $item)
+			{
+				if($item->isDir() && file_exists($p = $item->getPathname() . DIRECTORY_SEPARATOR . $class . PHP_EXT))
+				{
+					require_once($p);
+					return;
+				}
+			}
 		}
 	}
 

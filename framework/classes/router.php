@@ -67,6 +67,7 @@ class Router
 			else if(is_link($this->controller_base . $segment) || is_dir($this->controller_base . $segment))
 			{
 				$this->controller_base .= $segment . DIRECTORY_SEPARATOR;
+				$this->index++;
 			}
 
 			if(is_file($this->controller_base . $segment . PHP_EXT))
