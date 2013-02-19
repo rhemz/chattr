@@ -1,13 +1,11 @@
 <html>
 <head>
-	<title>The is my home view!</title>
+	<title>Welcome to Chattr</title>
 </head>
 
 <body>
 
-	<p>
-		This is my body.  Do stuff to me.
-	</p>
+	<input></input>
 
 	<p>
 		<?=$something?>
