@@ -1,4 +1,5 @@
 <?php
 
 
-$config['chatroom_id_chars'] = 			array('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
+$config['id_length']				= 20;
+$config['id_chars'] 				= 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
