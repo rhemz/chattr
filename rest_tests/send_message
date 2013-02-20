@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="3.1"><request><http-version>1.1</http-version><http-follow-redirects/><URL>http://localhost:9005/rest/message/send</URL><method>POST</method><cookies><cookie name="chattr_sess" value="pcl7t0t6b4q7mg8mi92jk86jf1"/></cookies><body><string content-type="application/x-www-form-urlencoded" charset="UTF-8">room_id=123&amp;text=test+test</string></body></request></rest-client>
