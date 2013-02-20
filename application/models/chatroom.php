@@ -21,4 +21,16 @@ class Chatroom_Model extends Model
 	}
 
 
+	public function create_room($id, $user_id, $name = null)
+	{
+		if(is_null($id) || $this->room_exists($id))
+		{
+			return false;
+		}
+
+		$sql = "INSERT INTO room (`id`, `creator`, `name`) VALUES (?, ?, ?)";
+		return $this->query($sql, array($id, $user_id, $name));
+	}
+
+
 }
