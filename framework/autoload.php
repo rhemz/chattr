@@ -19,11 +19,12 @@ function __autoload($class)
 			$class = str_ireplace($s, '', $class);
 			$path = APPLICATION_PATH . $path . DIRECTORY_SEPARATOR;
 
-			foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $item)
+			foreach(new RecursiveIteratorIterator(
+				new RecursiveDirectoryIterator($path, FilesystemIterator::NEW_CURRENT_AND_KEY | FilesystemIterator::SKIP_DOTS)) as $item)
 			{
-				if($item->isDir() && file_exists($p = $item->getPathname() . DIRECTORY_SEPARATOR . $class . PHP_EXT))
+				if($class == basename($item->getPathname(), PHP_EXT))
 				{
-					require_once($p);
+					require_once($item->getPathname());
 					return;
 				}
 			}
