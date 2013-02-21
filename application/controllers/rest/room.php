@@ -25,6 +25,6 @@ class Room_Controller extends Controller_Rest
 			$id = $helper->generate_id($this->config->get('chatroom.id_length'));
 		}
 
-		Output::return_json(array('id' => $id));	
+		Output::return_json(array('success' => true, 'id' => $id));	
 	}
 }
