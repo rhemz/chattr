@@ -17,5 +17,9 @@ $config['default_controller'] = 'home';
 */
 
 $config['mappings'] = array(
+	'/room/%var'					=> '/home/chatroom/$1',
 
+	// RESTful routes
+	'/rest/room/%var/messages'		=> '/rest/room/messages/$1',
+	'/rest/room/%var/send'			=> '/rest/message/send'
 );
