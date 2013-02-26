@@ -33,4 +33,29 @@ class Chatroom_Model extends Model
 	}
 
 
+	public function get_users($room_id, $cutoff)
+	{
+		$cutoff = microtime(true) - $cutoff;
+
+		$sql = "SELECT 
+					user.id,
+					user.name
+				FROM
+					user
+				INNER JOIN
+					message_retrieve ON user.id = message_retrieve.user_id
+				WHERE
+					message_retrieve.room_id = ?
+				AND
+					message_retrieve.last_checked > ?";
+
+		if($this->query($sql, array($cutoff)))
+		{
+			$result = $this->result();
+			return ($result->num_rows() > 0) ? $result : null;
+		}
+		return false;
+	}
+
+
 }
