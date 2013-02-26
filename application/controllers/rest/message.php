@@ -41,10 +41,8 @@ class Message_Controller extends Controller_Rest
 		else
 		{
 			// valid chat message
-			$timestamp = microtime(true);
-
 			$this->message_model = new Message_Model();
-			if(($id = $this->message_model->save_message($this->user->get_id(), $room_id, $text, $timestamp)) !== false)
+			if(($id = $this->message_model->save_message($this->user->get_id(), $room_id, $text)) !== false)
 			{
 				Output::return_json(array('success' => true, 'id' => $id));
 			}
