@@ -45,7 +45,11 @@ class Room_Controller extends Controller_Rest
 		}
 
 		Output::return_json(array('success' => false, 'message' => 'A database error occurred'));
-		
+	}
 
+
+	public function get_leave($room_id)
+	{
+		Output::return_json(array('success' => $this->room_model->leave_room($room_id, $this->user->get_id())));
 	}
 }
