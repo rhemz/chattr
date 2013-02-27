@@ -2,7 +2,6 @@
 
 <div id="page-wrap"> 
 	<div id="header">
-		<div id="current-user"><span>Logged in as:</span> <?=$userName?></div>
 	</div>
 	<div id="section">
 		<h2><?=$userName?></h2>
