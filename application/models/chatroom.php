@@ -49,12 +49,18 @@ class Chatroom_Model extends Model
 				AND
 					message_retrieve.last_checked > ?";
 
-		if($this->query($sql, array($cutoff)))
+		if($this->query($sql, array($room_id, $cutoff)))
 		{
 			$result = $this->result();
 			return ($result->num_rows() > 0) ? $result : null;
 		}
 		return false;
+	}
+
+
+	public function leave_room($room_id, $user_id)
+	{
+		return $this->query("DELETE FROM message_retrieve WHERE user_id = ? AND room_id = ?", array($user_id, $room_id));
 	}
 
 
