@@ -1,23 +1,38 @@
 <?php $this->load_view('common/header', array('title' => 'Chatting.  Room name will eventually go here')); ?>
 
-<div id="page-wrap"> 
-	<div id="header">
-	</div>
-	<div id="section">
-		<h2><?=$userName?></h2>
-		<div id="chat"></div>
-		<div id="userlist">
-			<ul>
-			<?php foreach($users as $user): ?>
-				<li><?=$user->name?></li>
-			<?php endforeach; ?>
-			</ul>
-		</div>
-		<form id="chat-form">
-			<textarea maxlength='144'></textarea>
-		</form>
-	</div>
-</div>
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+
+	$("#inputText").live("keypress", function(e) {
+		if(e.which == 13) {
+			$.ajax({
+				url: "/rest/room/<?=$room_id?>/send",
+				cache: false,
+				type: "POST",
+				data: {room_id: "<?=$room_id?>", text: $("#inputText").val()}
+			}).done(function(response) {
+				alert(response);
+				var obj = jQuery.parseJSON(response);
+				if(obj.success) {
+ 
+				} else {
+					alert("Something went horribly, horribly wrong!");
+				}
+			});
+		}
+	});
+
+});
+
+</script>
+
+
+
+<input type="text" size="80" id="inputText" />
+
+<br />
 
 
 make ajax GET requests to /rest/room/room_id/messages
