@@ -16,7 +16,7 @@ class Message_Controller extends Controller_Rest
 	}
 
 
-	public function post_send()
+	public function post_send($room_id)
 	{
 		$room_id = Input::post($this->config->get('message.key_room'));
 		$text = Input::post($this->config->get('message.key_text'));
