@@ -12,8 +12,6 @@ $(document).ready(function() {
 		}).done(function(response) {
 			var obj = jQuery.parseJSON(response);
 			if(obj.success) {
-				// alert("Successfully created roomID: " + obj.id);
-
 				// display some kind of fancy feedback that indicates success and take the user to the room page
 				window.location.href = "/room/" + obj.id; 
 			} else {
