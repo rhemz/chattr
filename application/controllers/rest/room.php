@@ -18,6 +18,10 @@ class Room_Controller extends Controller_Rest
 	}
 
 
+	/**
+	* Create a new chatroom with a unique ID
+	* @return mixed JSON 
+	*/
 	public function post_create()
 	{
 		$helper = new Chatroom_Helper();
@@ -32,6 +36,11 @@ class Room_Controller extends Controller_Rest
 	}
 
 
+	/**
+	* Get the incoming messages that have been sent to the chatroom since the last time the user polled.
+	* @param string $room_id The unique chatroom ID
+	* @return mixed JSON 
+	*/
 	public function get_messages($room_id)
 	{
 		if(!$this->room_model->room_exists($room_id))
@@ -44,12 +53,34 @@ class Room_Controller extends Controller_Rest
 			Output::return_json(array('success' => true, 'messages' => $messages->rows));
 		}
 
-		Output::return_json(array('success' => false, 'message' => 'A database error occurred'));
+		Output::return_json(array('success' => false, 'message' => 'A database error occurred trying to fetch chatroom messages'));
 	}
 
 
+	/**
+	* Process a leave-room request for the current user
+	* @param string $room_id The unique chatroom ID
+	* @return mixed JSON 
+	*/
 	public function get_leave($room_id)
 	{
 		Output::return_json(array('success' => $this->room_model->leave_room($room_id, $this->user->get_id())));
+	}
+
+
+	/**
+	* Get the current active users in a given chatroom
+	* @param string $room_id The unique chatroom ID
+	* @return mixed JSON 
+	*/
+	public function get_users($room_id)
+	{
+		$users = $this->room_model->get_users($room_id, $this->config->get('chatroom.time_leave'));
+
+		if($users = $this->room_model->get_users($room_id, $this->config->get('chatroom.time_leave')))
+		{
+			Output::return_json(array('success' => true, 'users' => $users->rows));
+		}
+		Output::return_json(array('success' => false, 'message' => 'A database error occurred trying to fetch chatroom users'));
 	}
 }
