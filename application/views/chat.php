@@ -7,6 +7,9 @@ var chat = new Chat();
 var users = new Array();
 
 
+/*
+	Objects
+*/
 function Message(msgJson) {
 
 	this.id = msgJson.message_id;
@@ -166,6 +169,7 @@ $(document).ready(function() {
 
 			// for now just wipe the select box entries and re-add them.  might cause flickering?
 			// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
+			// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
 			$("#userSelect").append('<option value="' + value.name + '">' + value.name + '</option>');
 
 		});
@@ -175,8 +179,8 @@ $(document).ready(function() {
 	/*
 		Message checker.
 	*/
-	setInterval(function() {
 
+	function checkForMessages() {
 		$.ajax({
 			url: "/rest/room/<?=$room_id?>/messages",
 			cache: false,
@@ -196,14 +200,16 @@ $(document).ready(function() {
 			}
 
 		});
-	}, <?=$this->config->get('chatroom.message_check_interval')?>);
+	}
+	checkForMessages();
+	setInterval(checkForMessages, <?=$this->config->get('chatroom.message_check_interval')?>);
 
 
 	/*
 		Room participants check.  Eventually this might be merged with message check to cut down on # of requests.
 	*/
-	setInterval(function() {
 
+	function getRoomParticipants() {
 		$.ajax({
 			url: "/rest/room/<?=$room_id?>/users",
 			cache: false,
@@ -219,7 +225,9 @@ $(document).ready(function() {
 			}
 
 		});
-	}, <?=$this->config->get('chatroom.room_check_interval')?>)
+	}
+	getRoomParticipants();
+	setInterval(getRoomParticipants, <?=$this->config->get('chatroom.room_check_interval')?>)
 
 });
 
@@ -255,5 +263,7 @@ $(document).ready(function() {
 	Hit F2 to bring up the debug console to see whats going on.  Filter out the raw responses by unchecking the green box in it.
 </p>
 
+
+<div class="ajaxmodal"><!-- ajax loader --></div>
 
 <?php $this->load_view('common/footer'); ?>
