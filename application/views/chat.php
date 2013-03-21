@@ -147,6 +147,8 @@ $(document).ready(function() {
 
 	function updateUsers(userList) {
 
+		$("#userSelect").empty();
+
 		$.each(userList.users, function(index, value) {
 
 			var r = $.grep(users, function(e) {
@@ -158,8 +160,14 @@ $(document).ready(function() {
 				users.push(new User(value));
 			}
 
-			// if($("#userSelect").find)
+			// if the name exists in the new userlist and not the selectbox, add it to the select
+			// if the name exists in the selectbox but not the userlist, remove it from the select
+			// if the name exists in both, do nothing
+
+			// for now just wipe the select box entries and re-add them.  might cause flickering?
 			// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
+			$("#userSelect").append('<option value="' + value.name + '">' + value.name + '</option>');
+
 		});
 	}
 
