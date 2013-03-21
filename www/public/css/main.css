@@ -8,15 +8,15 @@
 }
 
 
-#userList {
+#userDiv {
 	overflow: auto;
 	background-color: #eefff7;
 	width: 120px;
 	height: 500px;
 }
 
-#userSelect {
-	height: 200px;
+#userList {
+	
 }
 
 p {

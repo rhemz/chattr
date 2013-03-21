@@ -150,7 +150,7 @@ $(document).ready(function() {
 
 	function updateUsers(userList) {
 
-		$("#userSelect").empty();
+		$("#userList").empty();
 
 		$.each(userList.users, function(index, value) {
 
@@ -170,7 +170,7 @@ $(document).ready(function() {
 			// for now just wipe the select box entries and re-add them.  might cause flickering?
 			// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
 			// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-			$("#userSelect").append('<option value="' + value.name + '">' + value.name + '</option>');
+			$("#userSelect").append('<li>' + value.name + '</li>');
 
 		});
 	}
@@ -238,10 +238,10 @@ $(document).ready(function() {
 
 </div>
 
-<div id="userList">
-	<select size="1" id="userSelect" multiple="yes">
+<div id="userDiv">
+	<ul id="userList">
 
-	</select>
+	</ul>
 </div>
 
 
