@@ -3,6 +3,9 @@
 <script type="text/javascript">
 
 var name = "<?=$user->get_name()?>";
+var chat = new Chat();
+var users = new Array();
+
 
 function Message(msgJson) {
 
@@ -13,7 +16,58 @@ function Message(msgJson) {
 	this.timestamp = msgJson.timestamp;
 
 	this.formatMessage = function() {
-		return "(" + this.timestamp + ") " + this.user_name + ": " + this.text;
+		return "(" + this.formatTime() + ") " + this.user_name + ": " + this.text;
+	}
+
+	this.formatTime = function() {
+		var date = new Date([Math.round(this.timestamp)] * 1000);
+
+		// return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+		return date.toLocaleTimeString();
+	}
+
+	this.messageHTML = function() {
+		// this html will be fancier once its gussied up
+		return "<p>(" + this.formatTime() + ") <b>" + this.user_name + "</b>: " + this.text + "</p>";
+	}
+}
+
+
+function User(userObj) {
+
+	this.id = userObj.id;
+	this.name = userObj.name;
+
+	this.checkName = function(name) {
+		if(this.name !== name) {
+			var msg = this.name + " changed their name to " + name;
+			log.info(msg);
+			chat.addSystemMessage(msg);
+
+			this.name = name;
+		}
+	}
+}
+
+
+function Chat() {
+
+	this.div = "#mainChat";
+
+	this.addUserMessage = function(msgObject) {
+		$(this.div).append(msgObject.messageHTML());
+
+		$(this.div).animate({
+			scrollTop: $(this.div)[0].scrollHeight
+		}, 'slow');
+	}
+
+	this.addSystemMessage = function(message) {
+		$(this.div).append('<p class="systemMessage">' + message + '</p>');
+
+		$(this.div).animate({
+			scrollTop: $(this.div)[0].scrollHeight
+		}, 'slow');
 	}
 }
 
@@ -41,8 +95,8 @@ $(document).ready(function() {
 			$.ajax({
 				url: "/rest/user/name",
 				cache: false,
-				type: "POST",
-				timeout: <?=$this->config->get('chatroom.client_send_timeout')?>,
+				type: "PUT",
+				timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
 				data: {username: $("#nameText").val()}
 			}).done(function(response) {
 				log.debug(response);
@@ -75,7 +129,7 @@ $(document).ready(function() {
 			url: "/rest/room/<?=$room_id?>/send",
 			cache: false,
 			type: "POST",
-			timeout: <?=$this->config->get('chatroom.client_send_timeout')?>,
+			timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
 			data: {room_id: "<?=$room_id?>", text: message}
 		}).done(function(response) {
 			log.debug(response);
@@ -91,6 +145,25 @@ $(document).ready(function() {
 	}
 
 
+	function updateUsers(userList) {
+
+		$.each(userList.users, function(index, value) {
+
+			var r = $.grep(users, function(e) {
+				return e.id == value.id;
+			});
+			if(r.length == 1) {
+				r[0].checkName(value.name);
+			} else if(r.length == 0) {
+				users.push(new User(value));
+			}
+
+			// if($("#userSelect").find)
+			// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
+		});
+	}
+
+
 	/*
 		Message checker.
 	*/
@@ -100,7 +173,7 @@ $(document).ready(function() {
 			url: "/rest/room/<?=$room_id?>/messages",
 			cache: false,
 			type: "GET",
-			timeout: <?=$this->config->get('chatroom.client_check_timeout')?>
+			timeout: <?=$this->config->get('chatroom.message_check_timeout')?>
 		}).done(function(response) {
 			log.debug(response);
 			var obj = jQuery.parseJSON(response);
@@ -108,21 +181,56 @@ $(document).ready(function() {
 				$.each(obj.messages, function(index, value) {
 					var msg = new Message(value);
 					log.info(msg.formatMessage());
+					chat.addUserMessage(msg);
 				});
 			} else {
 				log.error("Error retrieving messages: " + response);
 			}
 
 		});
-	}, <?=$this->config->get('chatroom.client_check_interval')?>);
+	}, <?=$this->config->get('chatroom.message_check_interval')?>);
+
+
+	/*
+		Room participants check.  Eventually this might be merged with message check to cut down on # of requests.
+	*/
+	setInterval(function() {
+
+		$.ajax({
+			url: "/rest/room/<?=$room_id?>/users",
+			cache: false,
+			type: "GET",
+			timeout: <?=$this->config->get('chatroom.room_check_timeout')?>
+		}).done(function(response) {
+			log.debug(response);
+			var obj = jQuery.parseJSON(response);
+			if(obj.success) {
+				updateUsers(obj);
+			} else {
+				log.error("Error retrieving room list: " + response);
+			}
+
+		});
+	}, <?=$this->config->get('chatroom.room_check_interval')?>)
 
 });
 
 </script>
 
 
+<div id="mainChat">
+
+</div>
+
+<div id="userList">
+	<select size="1" id="userSelect" multiple="yes">
+
+	</select>
+</div>
+
+
 <p>
-	<input type="text" size="80" id="inputText" />
+	<input type="text" size="120" id="inputText" />
 	<input type="button" value="Send" id="sendButton" />
 </p>
 
@@ -135,8 +243,9 @@ $(document).ready(function() {
 </p>
 
 
-make ajax GET requests to /rest/room/room_id/messages
-<br />
-make ajax POST request to /rest/message/send, sending keys 'text' 'room_id'
+<p>
+	Hit F2 to bring up the debug console to see whats going on.  Filter out the raw responses by unchecking the green box in it.
+</p>
+
 
 <?php $this->load_view('common/footer'); ?>
