@@ -1,0 +1,26 @@
+
+#mainChat {
+	overflow: auto;
+	width: 800px;
+	height: 500px;
+	background-color: #eef7ff;
+	float: left;
+}
+
+
+#userList {
+	overflow: auto;
+	background-color: #eefff7;
+	width: 120px;
+	height: 500px;
+}
+
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+
+}
+
+p.systemMessage {
+	background-color: #ffeeee;
+}
