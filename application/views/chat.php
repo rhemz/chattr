@@ -89,7 +89,7 @@ $(document).ready(function() {
 
 	$("#sendButton").on("mouseup", function() {
 		if($("#inputText").val().length > 0) {
-			// sendMessage(sendMessage($("#inputText").val());
+			sendMessage(sendMessage($("#inputText").val());
 		}
 	});
 
