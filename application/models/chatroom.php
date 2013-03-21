@@ -47,7 +47,9 @@ class Chatroom_Model extends Model
 				WHERE
 					message_retrieve.room_id = ?
 				AND
-					message_retrieve.last_checked > ?";
+					message_retrieve.last_checked > ?
+				ORDER BY
+					user.name ASC";
 
 		if($this->query($sql, array($room_id, $cutoff)))
 		{
