@@ -170,7 +170,7 @@ $(document).ready(function() {
 			// for now just wipe the select box entries and re-add them.  might cause flickering?
 			// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
 			// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-			$("#userSelect").append('<li>' + value.name + '</li>');
+			$("#userList").append('<li>' + value.name + '</li>');
 
 		});
 	}
@@ -240,7 +240,7 @@ $(document).ready(function() {
 
 <div id="userDiv">
 	<ul id="userList">
-
+		<li>users</li>
 	</ul>
 </div>
 
