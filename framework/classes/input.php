@@ -6,6 +6,9 @@
 */
 class Input
 {
+
+	private static $put_data;
+
 	
 	/**
 	* Retrieve a value from HTTP GET.  If not present, fall back to the optionally supplied default value.
@@ -32,6 +35,38 @@ class Input
 		return isset($_POST[$key])
 			? $_POST[$key]
 			: $default;
+	}
+
+
+	/**
+	* Retrieve a value from HTTP PUT.  If not present, fall back to the optionally supplied default value.
+	* @param string $key PUT key
+	* @param mixed $default The fallback default value
+	* @return mixed
+	*/
+	public static function put($key, $default = null)
+	{
+		if(is_null(self::$put_data))
+		{
+			parse_str(file_get_contents('php://input'), self::$put_data);
+		}
+
+		return isset(self::$put_data[$key])
+			? self::$put_data[$key]
+			: $default;		
+	}
+
+
+	/**
+	* Retrieve a value from HTTP DELETE.  If not present, fall back to the optionally supplied default value.
+	* This function is just an alias of Input::put, as PHP handles HTTP PUT and DELETE data the same.
+	* @param string $key DELETE key
+	* @param mixed $default The fallback default value
+	* @return mixed
+	*/
+	public static function delete($key, $default = null)
+	{
+		return self::put($key, $default);
 	}
 
 
