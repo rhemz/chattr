@@ -33,6 +33,10 @@ function Message(msgJson) {
 		// this html will be fancier once its gussied up
 		return "<p>(" + this.formatTime() + ") <b>" + this.user_name + "</b>: " + this.text + "</p>";
 	}
+
+	this.messageNotification = function() {
+		return this.user_name + ": " + this.text;
+	}
 }
 
 
@@ -44,10 +48,12 @@ function User(userObj) {
 	this.checkName = function(name) {
 		if(this.name !== name) {
 			var msg = this.name + " changed their name to " + name;
-			log.info(msg);
 			chat.addSystemMessage(msg);
-
 			this.name = name;
+
+			<?php if(ENVIRONMENT == Environment::Development): ?>
+				log.info(msg);
+			<?php endif; ?>
 		}
 	}
 }
@@ -59,6 +65,11 @@ function Chat() {
 
 	this.addUserMessage = function(msgObject) {
 		$(this.div).append(msgObject.messageHTML());
+		
+		if(window.webkitNotifications.checkPermission() == 0) {
+			var n = window.webkitNotifications.createNotification('/public/images/notification.png', 'New Message', msgObject.messageNotification());
+			n.show();
+		}
 
 		$(this.div).animate({
 			scrollTop: $(this.div)[0].scrollHeight
@@ -78,6 +89,25 @@ function Chat() {
 $(document).ready(function() {
 
 	log.info("Current username: " + name);
+
+	
+
+	$("#html5notify").click(function(e) {
+
+		if(window.webkitNotifications) {
+			if($("#html5notify").is(":checked")) {
+				if(window.webkitNotifications.checkPermission() != 0) {
+					log.info("requesting webkitNotifications permission");
+					window.webkitNotifications.requestPermission();
+				}
+			} else {
+				// disable them.  probably going to have to set a cookie when they're enabled and change this value
+				log.info("disabling webkitNotifications");
+			}
+		}
+	});
+
+
 	/*
 		Event listeners
 	*/
@@ -102,7 +132,11 @@ $(document).ready(function() {
 				timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
 				data: {username: $("#nameText").val()}
 			}).done(function(response) {
-				log.debug(response);
+				<?php if(ENVIRONMENT == Environment::Development): ?>
+					log.debug(response);
+				<?php endif; ?>
+
+				
 				var obj = jQuery.parseJSON(response);
 				if(obj.success) {
 					name = $("#nameText").val();
@@ -126,7 +160,7 @@ $(document).ready(function() {
 		when they're fetched back.
 	*/
 	function sendMessage(message) {
-		$("#inputText, #sendButton").prop("disabled", true);
+		// $("#inputText, #sendButton").prop("disabled", true);
 		
 		$.ajax({
 			url: "/rest/room/<?=$room_id?>/send",
@@ -135,7 +169,10 @@ $(document).ready(function() {
 			timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
 			data: {room_id: "<?=$room_id?>", text: message}
 		}).done(function(response) {
-			log.debug(response);
+			<?php if(ENVIRONMENT == Environment::Development): ?>
+				log.debug(response);
+			<?php endif; ?>
+
 			var obj = jQuery.parseJSON(response);
 			if(obj.success) {
 				$("#inputText").val("");
@@ -143,7 +180,7 @@ $(document).ready(function() {
 				log.error("Error sending message: " + response);
 			}
 
-			$("#inputText, #sendButton").prop("disabled", false); 
+			// $("#inputText, #sendButton").prop("disabled", false); 
 		});
 	}
 
@@ -187,16 +224,25 @@ $(document).ready(function() {
 			type: "GET",
 			timeout: <?=$this->config->get('chatroom.message_check_timeout')?>
 		}).done(function(response) {
-			log.debug(response);
+			<?php if(ENVIRONMENT == Environment::Development): ?>
+				log.debug(response);
+			<?php endif; ?>
+
 			var obj = jQuery.parseJSON(response);
 			if(obj.success) {
 				$.each(obj.messages, function(index, value) {
 					var msg = new Message(value);
-					log.info(msg.formatMessage());
+
+					<?php if(ENVIRONMENT == Environment::Development): ?>
+						log.info(msg.formatMessage());
+					<?php endif; ?>
+
 					chat.addUserMessage(msg);
 				});
 			} else {
-				log.error("Error retrieving messages: " + response);
+				<?php if(ENVIRONMENT == Environment::Development): ?>
+					log.error("Error retrieving messages: " + response);
+				<?php endif; ?>
 			}
 
 		});
@@ -216,12 +262,17 @@ $(document).ready(function() {
 			type: "GET",
 			timeout: <?=$this->config->get('chatroom.room_check_timeout')?>
 		}).done(function(response) {
-			log.debug(response);
+			<?php if(ENVIRONMENT == Environment::Development): ?>
+				log.debug(response);
+			<?php endif; ?>
+
 			var obj = jQuery.parseJSON(response);
 			if(obj.success) {
 				updateUsers(obj);
 			} else {
-				log.error("Error retrieving room list: " + response);
+				<?php if(ENVIRONMENT == Environment::Development): ?>
+					log.error("Error retrieving room list: " + response);
+				<?php endif; ?>
 			}
 
 		});
@@ -263,6 +314,10 @@ $(document).ready(function() {
 	Hit F2 to bring up the debug console to see whats going on.  Filter out the raw responses by unchecking the green box in it.
 </p>
 
+<p>
+	<input type="checkbox" id="html5notify" value="" />
+	<label for="html5notify">Enable Notifications</label>
+</p>
 
 <div class="ajaxmodal"><!-- ajax loader --></div>
 
