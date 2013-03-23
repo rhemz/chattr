@@ -37,7 +37,9 @@ class Message_Model extends Model
 				WHERE
 					message.room_id = ?
 				AND
-					message.timestamp >= (SELECT last_checked FROM message_retrieve WHERE user_id = ? AND room_id = ?)";
+					message.timestamp >= (SELECT last_checked FROM message_retrieve WHERE user_id = ? AND room_id = ?)
+				GROUP BY 
+					message.id";
 
 		if($this->query($sql, array($room_id, $user_id, $room_id)))
 		{
