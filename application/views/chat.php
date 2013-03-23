@@ -5,6 +5,8 @@
 var name = "<?=$user->get_name()?>";
 var chat = new Chat();
 var users = new Array();
+var window_focus;
+
 
 
 /*
@@ -66,7 +68,7 @@ function Chat() {
 	this.addUserMessage = function(msgObject) {
 		$(this.div).append(msgObject.messageHTML());
 		
-		if(window.webkitNotifications.checkPermission() == 0) {
+		if(window.webkitNotifications.checkPermission() == 0 && !window_focus) {
 			var n = window.webkitNotifications.createNotification('/public/images/notification.png', 'New Message', msgObject.messageNotification());
 			n.show();
 		}
@@ -90,7 +92,12 @@ $(document).ready(function() {
 
 	log.info("Current username: " + name);
 
-	
+	window.focus(function() {
+		window_focus = true;
+	}).blur(function() {
+		window_focus = false;
+	});
+
 
 	$("#html5notify").click(function(e) {
 
