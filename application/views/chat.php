@@ -74,7 +74,8 @@ function Chat() {
 		}
 
 		$(this.div).animate({
-			scrollTop: $(this.div)[0].scrollHeight
+			scrollTop: $(this.div)[0].scrollHeight,
+			queue: false
 		}, 'slow');
 	}
 
