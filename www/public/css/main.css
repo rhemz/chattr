@@ -1,7 +1,7 @@
 
 #mainChat {
 	overflow: auto;
-	width: 800px;
+	width: 700px;
 	height: 500px;
 	background-color: #eef7ff;
 	float: left;
@@ -11,17 +11,21 @@
 #userDiv {
 	overflow: auto;
 	background-color: #eefff7;
-	width: 120px;
+	width: 160px;
 	height: 500px;
 }
 
-p {
+body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: small;
 }
 
 p.systemMessage {
 	background-color: #ffeeee;
+}
+
+#userList {
+  margin-left: -20px;
 }
 
 ul#userList li {
