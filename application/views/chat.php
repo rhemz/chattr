@@ -92,7 +92,7 @@ $(document).ready(function() {
 
 	log.info("Current username: " + name);
 
-	window.focus(function() {
+	$(window).focus(function() {
 		window_focus = true;
 	}).blur(function() {
 		window_focus = false;
