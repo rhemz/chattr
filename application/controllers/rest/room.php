@@ -32,6 +32,9 @@ class Room_Controller extends Controller_Rest
 			$id = $helper->generate_id($this->config->get('chatroom.id_length'));
 		}
 
+		// prune dead rooms.  this will be moved to a mysql scheduled event
+		$this->room_model->prune_rooms($this->config->get('chatroom.time_dead'));
+
 		Output::return_json(array('success' => true, 'id' => $id));	
 	}
 
