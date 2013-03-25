@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/public/css/blackbird.css" />
 
 <script src="/public/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="/public/scripts/jquery.cookie.js" type="text/javascript"></script>
 <script src="/public/scripts/chat.js" type="text/javascript" ></script>
 <script src="/public/scripts/blackbird.js" type="text/javascript" ></script>
 
