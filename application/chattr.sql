@@ -74,6 +74,30 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+/* Set up room pruner */
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT 
+  `room_prune`
+ON SCHEDULE 
+  EVERY 30 MINUTE
+DO
+  DELETE r.* FROM
+    room r
+  INNER JOIN
+    message_retrieve mr ON r.id = mr.room_id
+  WHERE
+    (SELECT 
+      last_checked 
+    FROM 
+      message_retrieve
+    WHERE
+      message_retrieve.room_id = r.id
+    ORDER BY
+      last_checked DESC
+    LIMIT 1) < (UNIX_TIMESTAMP() - 600);
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
