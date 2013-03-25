@@ -15,6 +15,10 @@
 	var outputList;
 	var cache = [];
 
+	// hacked in, as blackbird will consume an egregious amount of memory if a large log builds - russ
+	var numItems = 0;
+	var maxItems = 100;
+
 	var state = getState();
 	var classes = {};
 	var profiler = {};
@@ -82,6 +86,14 @@
 	}
 
 	function addMessage( type, content ) { //adds a message to the output list
+
+		// memory fix
+		if(numItems <= maxItems) {
+			numItems++;
+		} else {
+			clear();
+		}
+		
 		content = ( content.constructor == Array ) ? content.join( '' ) : content;
 		if ( outputList ) {
 			var newMsg = document.createElement( 'LI' );
@@ -96,6 +108,8 @@
 
 	function clear() { //clear list output
 		outputList.innerHTML = '';
+		numItems = 0;
+		cache = [];
 	}
 
 	function clickControl( evt ) {
