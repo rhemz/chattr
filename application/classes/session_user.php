@@ -7,7 +7,6 @@ class Session_User
 
 	const Session_Key = 'user_id';
 	const User_Name_Key = 'user_name';
-	const Default_User_Name = 'Anonymous';
 
 	private $mvc;
 	private $user_model;
@@ -25,7 +24,8 @@ class Session_User
 
 			if(!is_numeric($id = $this->user_model->get_id($this->session_id)))
 			{
-				$name = self::Default_User_Name . rand(1, $this->mvc->config->get(sprintf("%s.default_username_max", self::Config_Group)));
+				$name = $this->mvc->config->get(sprintf("%s.default_username", self::Config_Group)) 
+					. rand(1, $this->mvc->config->get(sprintf("%s.default_username_max", self::Config_Group)));
 				$id = $this->user_model->create_user($this->session_id, $name);
 			}
 
@@ -47,7 +47,7 @@ class Session_User
 
 	public function get_name()
 	{
-		return $this->mvc->session->get(self::User_Name_Key, self::Default_User_Name);
+		return $this->mvc->session->get(self::User_Name_Key, $this->mvc->config->get(sprintf("%s.default_username_max", self::Config_Group)));
 	}
 
 
