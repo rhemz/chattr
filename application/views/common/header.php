@@ -4,7 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Chattr - <?=$title?></title>
 
-<link rel="stylesheet" type="text/css" href="/public/css/<?=(new Session_User())->get_theme()?>.css"/>
+<?php
+	$user = new Session_User();
+?>
+<link rel="stylesheet" type="text/css" href="/public/css/<?=$user->get_theme()?>.css"/>
 <link rel="stylesheet" type="text/css" href="/public/css/blackbird.css" />
 
 <script src="/public/scripts/jquery.min.js" type="text/javascript"></script>
