@@ -7,9 +7,11 @@ class Session_User
 
 	const Session_Key = 'user_id';
 	const User_Name_Key = 'user_name';
+	const Theme_Key = 'theme';
 
 	private $mvc;
 	private $user_model;
+	private $theme;
 
 	private $session_id;
 
@@ -31,6 +33,7 @@ class Session_User
 
 			$this->mvc->session->set(self::Session_Key, $id);
 			$this->mvc->session->set(self::User_Name_Key, $name);
+			$this->mvc->session->set(self::Theme_Key, $this->mvc->config->get('global.default_theme'));
 		}
 		
 	}
@@ -54,5 +57,17 @@ class Session_User
 	public function get_id()
 	{
 		return $this->mvc->session->get(self::Session_Key);
+	}
+
+
+	public function get_theme()
+	{
+		return $this->mvc->session->get(self::Theme_Key);
+	}
+
+
+	public function set_theme($name)
+	{
+		return $this->mvc->session->set(self::Theme_Key, $name);
 	}
 }
