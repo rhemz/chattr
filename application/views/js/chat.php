@@ -184,7 +184,10 @@ $(document).ready(function() {
 
 
 	function sendMessage(message) {
-		// $("#inputText, #sendButton").prop("disabled", true);
+		// some client side validation
+		if(message.length > <?=$this->config->get('message.max_length')?>) {
+			chat.addSystemMessage('The maximum message length you can send is <?=$this->config->get('message.max_length')?> characters');
+		}
 		
 		$.ajax({
 			url: "/rest/room/<?=$room_id?>/send",
