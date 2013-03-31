@@ -53,13 +53,6 @@ class Room_Controller extends Controller_Rest
 
 		if(($messages = $this->message_model->get_messages($room_id, $this->user->get_id())) !== false)
 		{
-			// if(is_null(Input::get('hackalicous')))
-			// {
-			// 	foreach($messages->rows as &$row)
-			// 	{
-			// 		$row['text'] = htmlentities($row['text']);
-			// 	}
-			// }
 			Output::return_json(array('success' => true, 'messages' => $messages->rows));
 		}
 
