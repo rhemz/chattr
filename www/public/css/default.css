@@ -1,7 +1,8 @@
 
+
 #mainChat {
 	overflow: auto;
-	width: 700px;
+	width: 80%;
 	height: 500px;
 	background-color: #eef7ff;
 	float: left;
@@ -10,36 +11,63 @@
 
 #userDiv {
 	overflow: auto;
-	background-color: #eefff7;
-	width: 160px;
+	background-color: #f1f1f1;
+	width: 20%;
 	height: 500px;
 }
 
 body {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: small;
+  font-family: 'Istok Web', sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
 
-p.systemMessage {
-	background-color: #ffeeee;
+p.systemMessage {  
+  color: #fff;
+	background-color: #54728c;
+  margin: 0;
+  padding: 10px;
+}
+
+p {
+  margin: 0;
+  padding: 10px;
 }
 
 #userList {
-  margin-left: -20px;
+  padding: 0;
+  list-style-type: none;
+}
+
+textarea#inputText {
+  margin: 0 0px 0 -10px;
+  height: 40px;
+  width: 80%;
 }
 
 ul#userList li {
    font-weight: bold;
    margin: 0;
-   padding: 3px 10px 5px 20px;
-   border-bottom: 1px solid #ccc;
-   color: #666; 
+   padding: 10px;
+   color: #5d5d5d; 
 }
 ul#userList li:hover {
-   color: #000;
-   background-color: #ddd; 
+   color: #fff;
+   background-color: #54728c; 
 }
 
+input#sendButton {
+  height: 50px;
+  width: 20%;
+  background-color: #68b54d;
+  color: #fff;
+  border: 1px solid #519339;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  right: 0;
+  position: absolute;
+  margin: 0 8px;
+}
 
 
 .ajaxmodal {

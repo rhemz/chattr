@@ -15,7 +15,7 @@
 
 
 <p>
-	<input type="text" size="120" id="inputText" />
+	<textarea type="text" id="inputText" />
 	<input type="button" value="Send" id="sendButton" />
 </p>
 

@@ -32,7 +32,7 @@ function Message(msgJson) {
 
 	this.messageHTML = function() {
 		// this html will be fancier once its gussied up
-		return "<p>(" + this.formatTime() + ") <b>" + this.user_name + "</b>: " + this.text + "</p>";
+		return "<p class=\"message\"><span class=\"time\">" + this.formatTime() + "</span><span class=\"user\">" + this.user_name + "</span><span class=\"text\">" + this.text + "</span></p>";
 	}
 
 	this.messageNotification = function() {

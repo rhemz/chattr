@@ -46,5 +46,5 @@ function __autoload($class)
 			}
 		}
 	}
-	
+	echo $class . ' not found';
 }
