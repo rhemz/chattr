@@ -25,6 +25,6 @@ class Message
 
 	public function __toString()
 	{
-		return 
+		return $this->text;
 	}
 }
