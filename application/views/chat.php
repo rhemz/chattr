@@ -37,6 +37,10 @@
 	<label for="html5notify">Enable Notifications</label>
 </p>
 
+<p>
+	Current theme: <?=$user->get_theme()?>
+</p>
+
 <div class="ajaxmodal"><!-- ajax loader --></div>
 
 <?php $this->load_view('common/footer'); ?>
