@@ -31,6 +31,9 @@ $(document).ready(function() {
 	Your user_id: <?=$user->get_id()?>
 </p>
 
+<p>
+	Current theme: <?=$user->get_theme()?>
+</p>
 
 
 
