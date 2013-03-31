@@ -1,0 +1,69 @@
+
+#mainChat {
+	overflow: auto;
+	width: 700px;
+	height: 500px;
+	background-color: #eef7ff;
+	float: left;
+}
+
+
+#userDiv {
+	overflow: auto;
+	background-color: #eefff7;
+	width: 160px;
+	height: 500px;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+}
+
+p.systemMessage {
+	background-color: #ffeeee;
+}
+
+#userList {
+  margin-left: -20px;
+}
+
+ul#userList li {
+   font-weight: bold;
+   margin: 0;
+   padding: 3px 10px 5px 20px;
+   border-bottom: 1px solid #ccc;
+   color: #666; 
+}
+ul#userList li:hover {
+   color: #000;
+   background-color: #ddd; 
+}
+
+
+
+.ajaxmodal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url(/public/images/ajax-loader.gif) 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .ajaxmodal {
+    display: block;
+}
