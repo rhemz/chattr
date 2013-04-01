@@ -42,6 +42,13 @@ textarea#inputText {
   margin: 0 0px 0 -10px;
   height: 40px;
   width: 80%;
+  background-color: #f9f9f9;
+  border: 2px solid #dadada;
+  border-radius: 3px;
+}
+
+textarea[type="text"] {
+    font-family: 'Istok Web', sans-serif;
 }
 
 ul#userList li {
@@ -105,6 +112,10 @@ body.loading .ajaxmodal {
 }
 
 /* Messages */
+.message {
+  border-bottom: 1px solid #cccccc;
+  margin-right: 10px;
+}
 .message .time {
   float: right;
 }
