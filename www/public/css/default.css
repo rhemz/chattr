@@ -95,3 +95,15 @@ body.loading {
 body.loading .ajaxmodal {
     display: block;
 }
+
+/* Messages */
+.message.time {
+  float: right;
+}
+.message.user {
+  font-weight: bold;
+  display: block;
+}
+.message.text {
+  display: block;
+}
