@@ -1,50 +1,126 @@
 <?php
 
-function __autoload($class)
+
+class Autoloader
 {
-	$class = strtolower($class);
-	$config =& Config::get_instance();
+	private static $instance;
+	private $tree = array(FRAMEWORK_PATH => array(), APPLICATION_PATH => array(), 'CM' => array());
+	private $suffixes;
+	private $config;
 
-	// consider building this in bootstrap and using it in here, since this function is called so often
-	$suffixes = array(
-		$config->get('paths.controller_suffix') => $config->get('paths.controllers'),
-		$config->get('paths.model_suffix') => $config->get('paths.models')
-	);
 
-	// look for user defined models and controllers first
-	foreach($suffixes as $suffix => $path)
+	private function __construct()
 	{
-		if(stripos($class, ($s = sprintf("_%s", $suffix))) !== false)
-		{
-			$class = str_ireplace($s, '', $class);
-			$path = APPLICATION_PATH . $path . DIRECTORY_SEPARATOR;
+		$this->config =& Config::get_instance();
+		$this->config->load('paths');
 
-			foreach(new RecursiveIteratorIterator(
-				new RecursiveDirectoryIterator($path, FilesystemIterator::NEW_CURRENT_AND_KEY | FilesystemIterator::SKIP_DOTS)) as $item)
+		$this->suffixes = array(
+			$this->config->get('paths.controller_suffix')	=> $this->config->get('paths.controllers'),
+			$this->config->get('paths.model_suffix') 		=> $this->config->get('paths.models')
+		);
+
+		$this->build_cache();
+	}
+
+
+	public static function &get_instance()
+	{
+		if(is_null(self::$instance))
+		{
+			self::$instance = new Autoloader();
+		}
+		return self::$instance;
+	}
+
+
+	private function build_cache()
+	{
+		// build framework cache
+		foreach(new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator(FRAMEWORK_PATH . $this->config->get('paths.framework_classes'))) as $item)
+		{
+			if(!$item->isDir() && $item->isFile())
 			{
-				if($class == basename($item->getPathname(), PHP_EXT))
+				$this->tree[FRAMEWORK_PATH][] = $item->getPathname();
+			}
+		}
+
+
+		// build application cache
+		$nolook = $this->config->get('paths.nolook');
+		foreach(new RecursiveIteratorIterator(
+			$i = new RecursiveDirectoryIterator(APPLICATION_PATH)) as $item)
+		{
+			if(!in_array($i, $nolook) && !$item->isDir() && $item->isFile())
+			{
+				$this->tree[APPLICATION_PATH][] = $item->getPathname();
+			}
+		}
+	}
+
+
+	public function load_class($class)
+	{
+		// look for user defined models & controllers first
+		$class = strtolower($class);
+
+		if($file = $this->search_cache($class))
+		{
+			require_once($file);
+		}
+	}
+
+
+	private function search_cache($class)
+	{
+		// look for user defined models & controllers first
+		foreach($this->suffixes as $suffix => $path)
+		{
+			if(stripos($class, ($s = sprintf("_%s", $suffix))) !== false)
+			{
+				$class = str_ireplace($s, '', $class);
+				foreach($this->tree[APPLICATION_PATH] as $file)
 				{
-					require_once($item->getPathname());
-					return;
+					if(strpos($file, DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR) !== false
+						&& $class == basename($file, PHP_EXT))
+					{
+						return $file;
+					}
 				}
 			}
 		}
-	}
 
-
-	// if not found, look everywhere. application directory first, then framework
-	foreach(array(APPLICATION_PATH, FRAMEWORK_PATH) as $path)
-	{
-		foreach(new RecursiveIteratorIterator($i = new RecursiveDirectoryIterator($path)) as $item)
+		// look in application & framework directories
+		foreach(array($this->tree[APPLICATION_PATH], $this->tree[FRAMEWORK_PATH]) as $tree)
 		{
-			if( $item->isDir() 
-				&& !in_array($i, $config->get('paths.nolook'))
-				&& file_exists($p = $item->getPathname() . DIRECTORY_SEPARATOR . $class . PHP_EXT))
+			if($result = $this->check_tree($class, $tree))
 			{
-				require_once($p);
-				return;
+				return $result;
 			}
 		}
+
+		return false;
 	}
-	echo $class . ' not found';
+
+
+	private function check_tree($class, $tree)
+	{
+		foreach($tree as $file)
+		{
+			if($class == basename($file, PHP_EXT))
+			{
+				return $file;
+			}
+		}
+
+		return false;
+	}
+
+
+	public function register()
+	{
+		spl_autoload_register(array('Autoloader', 'load_class'));
+	}
+
+
 }

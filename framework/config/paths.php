@@ -11,3 +11,5 @@ $config['models']				= 'models';
 $config['views']				= 'views';
 
 $config['nolook']				= array('config', 'views'); // directories for the autoloader to skip
+
+$config['framework_classes']	= 'classes';

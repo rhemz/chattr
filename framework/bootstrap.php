@@ -5,9 +5,12 @@ require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'rz_mvc_exceptio
 require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'config' . PHP_EXT);
 require_once(FRAMEWORK_PATH . 'autoload' . PHP_EXT);
 
+$loader =& Autoloader::get_instance();
+$loader->register();
+
 // load core framework and application configs
 $config =& Config::get_instance();
-$config->load(array('paths', 'routes', 'environment', 'logging', 'session'));
+$config->load(array('routes', 'environment', 'logging', 'session'));
 
 // register custom shutdown and error handler hooks
 if($config->get('global.framework_handle_fatal_errors'))
