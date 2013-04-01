@@ -13,7 +13,7 @@
 
 
 <p>
-	<textarea type="text" id="inputText"></textarea>
+	<textarea type="text" id="inputText"> </textarea>
 	<input type="button" value="Send" id="sendButton" />
 </p>
 
