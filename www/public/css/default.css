@@ -97,13 +97,13 @@ body.loading .ajaxmodal {
 }
 
 /* Messages */
-.message.time {
+.message .time {
   float: right;
 }
-.message.user {
+.message .user {
   font-weight: bold;
   display: block;
 }
-.message.text {
+.message .text {
   display: block;
 }
