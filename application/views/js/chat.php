@@ -48,7 +48,7 @@ function User(userObj) {
 
 	this.checkName = function(name) {
 		if(this.name !== name) {
-			var msg = this.name + " changed their name to " + name;
+			var msg = "<span class=\"name\">" + this.name + "</span> changed their name to <span class=\"name\">" + name + "</span>";
 			chat.addSystemMessage(msg);
 			this.name = name;
 
