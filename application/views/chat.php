@@ -3,9 +3,7 @@
 <?php $this->load_view('js/chat', array('user' => $user, 'room_id' => $room_id)); ?>
 
 
-<div id="mainChat">
-
-</div>
+<div id="mainChat"></div>
 
 <div id="userDiv">
 	<ul id="userList">
