@@ -9,6 +9,7 @@
 ?>
 <link rel="stylesheet" type="text/css" href="/public/css/<?=$user->get_theme()?>.css"/>
 <link rel="stylesheet" type="text/css" href="/public/css/blackbird.css" />
+<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
 <script src="/public/scripts/jquery.min.js" type="text/javascript"></script>
 <script src="/public/scripts/jquery.cookie.js" type="text/javascript"></script>
