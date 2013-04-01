@@ -47,12 +47,20 @@ textarea#inputText {
 ul#userList li {
    font-weight: bold;
    margin: 0;
-   padding: 10px;
+   padding: 10px 10px 10px 25px;
    color: #5d5d5d; 
+}
+ul#userList li.alternate {
+   color: #fff;
+   background-color: #54728c;
 }
 ul#userList li:hover {
    color: #fff;
-   background-color: #54728c; 
+   background-color: #54728c;
+}
+ul#userList li.alternate:hover {
+   color: #fff;
+   background-color: #54728c;
 }
 
 input#sendButton {
