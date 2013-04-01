@@ -44,10 +44,7 @@ textarea#inputText {
   background-color: #f9f9f9;
   border: 2px solid #dadada;
   border-radius: 3px;
-}
-
-textarea[type="text"] {
-    font-family: 'Istok Web', sans-serif;
+  font-family: 'Istok Web', sans-serif;
 }
 
 ul#userList li {

@@ -2,6 +2,19 @@
 
 <?php $this->load_view('js/chat', array('user' => $user, 'room_id' => $room_id)); ?>
 
+<div id="topPane">
+	<div class="name">
+		<input type="text" size="20" id="nameText" />
+	</div>
+	<div class="notification">
+		<input type="checkbox" id="html5notify" value="" />
+		<label for="html5notify">Enable Notifications</label>
+	</div>	
+	<div>
+		Current theme: <?=$user->get_theme()?>
+	</div>
+	
+</div>
 
 <div id="mainChat"></div>
 
@@ -13,30 +26,8 @@
 
 
 <p class="form">
-	<textarea type="text" id="inputText"> </textarea>
+	<textarea id="inputText"></textarea>
 	<input type="button" value="Send" id="sendButton" />
-</p>
-
-
-<p>
-	Set name:
-	<input type="text" size="20" id="nameText" />
-	<br />
-	This will probably be a button or something clever that brings up a modal dialogue to set the name.  For now it's just a textfield w/ a listener.
-</p>
-
-
-<p>
-	Hit F2 to bring up the debug console to see whats going on.  Filter out the raw responses by unchecking the green box in it.
-</p>
-
-<p>
-	<input type="checkbox" id="html5notify" value="" />
-	<label for="html5notify">Enable Notifications</label>
-</p>
-
-<p>
-	Current theme: <?=$user->get_theme()?>
 </p>
 
 <div class="ajaxmodal"><!-- ajax loader --></div>
