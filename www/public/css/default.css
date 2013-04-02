@@ -34,6 +34,7 @@ p.systemMessage {
 	background-color: #54728c;
   margin: 0;
   padding: 10px;
+  text-shadow: 0 0 1px #fff;
 }
 
 p {
@@ -129,7 +130,7 @@ body.loading .ajaxmodal {
 
 /* Messages */
 .message {
-  border-bottom: 1px solid #cccccc;
+  border-top: 1px solid #cccccc;
   margin: 0 10px;
 }
 .message .time {
