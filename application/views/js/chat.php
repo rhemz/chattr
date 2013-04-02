@@ -172,6 +172,8 @@ $(document).ready(function() {
 				var obj = jQuery.parseJSON(response);
 				if(obj.success) {
 					name = $("#nameText").val();
+					$('.username').html(name);
+					$('.options').slideUp('fast');
 					log.info("Changed username to " + name);
 					$("#nameText").val("");
 				} else {

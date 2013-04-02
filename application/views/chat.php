@@ -6,7 +6,7 @@
 	<div id="topPane">
 		<div class="left"><span class="logo">Chattr</span></div>
 		<div class="right">
-			<div class="username">rickdmer</div>
+			<div class="username"><?=$user->get_name()?></div>
 			<div class="optionsarrow"><a href="#"></a></div>
 		</div>
 		<div class="options">

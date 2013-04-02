@@ -31,9 +31,11 @@ body {
 
 p.systemMessage {  
   color: #fff;
-	background-color: #54728c;
+	background-color: #e45857;
   margin: 0;
-  padding: 10px;
+  margin-top: -1px;
+  padding: 10px 20px;
+  font-weight: bold;
   text-shadow: 0 0 1px #fff;
 }
 
@@ -95,6 +97,7 @@ ul#userList li.alternate {
 ul#userList li:hover {
    color: #fff;
    background-color: #54728c;
+   text-shadow: 0 0 1px #fff;
 }
 ul#userList li.alternate:hover {
    color: #fff;
@@ -130,7 +133,7 @@ body.loading .ajaxmodal {
 
 /* Messages */
 .message {
-  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
   margin: 0 10px;
 }
 .message .time {
@@ -238,15 +241,16 @@ div.nameinput {
 /* Middle Pane */
 #middle {
   margin: 0;
-  height: 80%;
+  height: 85%;
   padding-top: 60px;
 }
 
 /* Input and Button Form */
 div.form {
   padding: 0;
-  height: 20%;
+  height: 15%;
   position: relative;
+  margin-top: -1px;
 }
 
 .right {
