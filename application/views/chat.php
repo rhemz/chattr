@@ -4,7 +4,7 @@
 <div class="colorbar"></div>
 <div id="content">
 	<div id="topPane">
-		<div class="left"></div>
+		<div class="left"><span class="logo">Chattr</span></div>
 		<div class="right">
 			<div class="username">rickdmer</div>
 			<div class="optionsarrow"><a href="#"></a></div>

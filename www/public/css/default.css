@@ -163,6 +163,7 @@ body.loading .ajaxmodal {
   position: absolute;
   width: 100%;
   top: 0;
+  text-shadow: 0 0 1px #fff;
 }
 
 div.nameinput {
@@ -183,6 +184,13 @@ div.nameinput {
 #topPane .left {
   height: 100%;
   width: 70%;
+  padding: 6px 16px;
+}
+
+#topPane .logo {
+  float: left;
+  font-weight: bold;
+  font-size: 35px;
 }
 
 #topPane .right {
@@ -195,6 +203,7 @@ div.nameinput {
   float: left;
   font-weight: bold;
   font-size: 1.2rem;
+  text-shadow: 0 0 1px #fff;
 }
 
 .optionsarrow {
