@@ -143,12 +143,13 @@ $(document).ready(function() {
 		Event listeners
 	*/
 	$("#inputText").on("keypress", function(e) {
-		if(e.which == 13 && $("#inputText").val().length > 0) {
+		if(e.which === 13 && $("#inputText").val().length > 0) {
+			e.preventDefault();
 			sendMessage($("#inputText").val());
 		}
 	});
 
-	$("#sendButton").on("mouseup", function() {
+	$("#sendButton").on("click", function() {
 		if($("#inputText").val().length > 0) {
 			sendMessage($("#inputText").val());
 		}
@@ -182,8 +183,15 @@ $(document).ready(function() {
 		}
 	});
 
+	$('.optionsarrow a').on("click", function() {
+		$('.options').slideToggle('fast');
+	});
+
 
 	function sendMessage(message) {
+
+		$("#inputText").attr("value", "");
+
 		// some client side validation
 		if(message.length > <?=$this->config->get('message.max_length')?>) {
 			chat.addSystemMessage('The maximum message length you can send is <?=$this->config->get('message.max_length')?> characters');
@@ -202,8 +210,9 @@ $(document).ready(function() {
 
 			var obj = jQuery.parseJSON(response);
 			if(obj.success) {
-				$("#inputText").val("");
+				//$("#inputText").val("");
 			} else {
+				$("#inputText").val(message);
 				log.error("Error sending message: " + response);
 			}
 

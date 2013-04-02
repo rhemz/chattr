@@ -8,7 +8,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: "/rest/room/create",
 			cache: false,
-			type: "POST"	
+			type: "POST"
 		}).done(function(response) {
 			var obj = jQuery.parseJSON(response);
 			if(obj.success) {

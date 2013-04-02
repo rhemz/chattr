@@ -1,9 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Istok+Web:400,700,400italic,700italic');
 
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
 #mainChat {
 	overflow: auto;
-	width: 80%;
-	height: 500px;
+	width: 70%;
+	height: 100%;
 	float: left;
 }
 
@@ -11,13 +17,15 @@
 #userDiv {
 	overflow: auto;
 	background-color: #f1f1f1;
-	width: 20%;
-	height: 500px;
+	height: 100%;
+  border-left: 1px solid #dadada;
 }
 
 body {
   font-family: 'Istok Web', sans-serif;
+  font-size: 1rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
+  margin: 0;
 }
 
 p.systemMessage {  
@@ -37,14 +45,39 @@ p {
   list-style-type: none;
 }
 
+.button {
+  background-color: #68b54d;
+  color: #fff;
+  border: 1px solid #519339;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  height: 50px;
+  width: 80px;
+}
+
+.textarea {
+  height: 100%;
+}
+
 textarea#inputText {
-  margin: 0 0px 0 -10px;
-  height: 40px;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   background-color: #f9f9f9;
-  border: 2px solid #dadada;
+  border-top: 1px solid #dadada !important;
+  border: none;
   border-radius: 3px;
   font-family: 'Istok Web', sans-serif;
+  font-size: 1rem;
+  text-shadow: 0 0 1px rgba(0,0,0,0.5);
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px;
 }
 
 ul#userList li {
@@ -64,20 +97,6 @@ ul#userList li:hover {
 ul#userList li.alternate:hover {
    color: #fff;
    background-color: #54728c;
-}
-
-input#sendButton {
-  height: 50px;
-  width: 20%;
-  background-color: #68b54d;
-  color: #fff;
-  border: 1px solid #519339;
-  border-radius: 2px;
-  font-weight: bold;
-  font-size: 16px;
-  right: 0;
-  position: absolute;
-  margin: 0 8px;
 }
 
 
@@ -121,4 +140,107 @@ body.loading .ajaxmodal {
 }
 .message .text {
   display: block;
+}
+
+/* Content */
+#content {
+  height: 100%;
+}
+
+/* Top Pane */
+.colorbar {
+  background-color: #54728c;
+  height: 60px;
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #466176;
+  top: 0;
+}
+
+#topPane {
+  color: #fff;
+  height: 60px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+div.nameinput {
+  width: 100%;
+  padding: 5px;
+}
+
+#nameText {
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 2px solid #dadada;
+  border-radius: 3px;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 1rem;
+  text-shadow: 0 0 1px rgba(0,0,0,0.5);
+}
+
+#topPane .left {
+  height: 100%;
+  width: 70%;
+}
+
+#topPane .right {
+  width: 30%;
+  padding: 16px 22px;
+  border-left: 1px solid #466176;
+}
+
+#topPane .username {
+  float: left;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.optionsarrow {
+  float: right;
+  background: transparent url(/public/images/settings.png) no-repeat;
+  height: 28px;
+  width: 30px;
+}
+
+.optionsarrow a {
+  text-decoration:none;
+  display: block;
+  height: 100%;
+}
+
+.options {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background-color: #54728c;
+  padding: 10px;
+  border-left: 1px solid #466176;
+  border-bottom: 1px solid #466176;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  border-radius: 0 0 0 5px;
+  font-weight: bold;
+  display: none;
+}
+
+/* Middle Pane */
+#middle {
+  margin: 0;
+  height: 80%;
+  padding-top: 60px;
+}
+
+/* Input and Button Form */
+div.form {
+  padding: 0;
+  height: 20%;
+  position: relative;
+}
+
+.right {
+  float: right;
+}
+.left {
+  float: left;
 }
