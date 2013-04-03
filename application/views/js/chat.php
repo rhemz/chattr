@@ -195,6 +195,10 @@ $(document).ready(function() {
 		$('#nameText').focus();
 	});
 
+	window.onbeforeunload = function(e) {
+	    return "You have an active room open.";
+	};
+
 
 	function sendMessage(message) {
 
