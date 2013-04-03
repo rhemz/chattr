@@ -36,7 +36,7 @@ p.systemMessage {
   margin-top: -1px;
   padding: 10px 20px;
   font-weight: bold;
-  text-shadow: 0 0 1px #fff;
+  text-shadow: 0 0 1px rgba(255,255,255,0.7);
 }
 
 p {
@@ -97,7 +97,7 @@ ul#userList li.alternate {
 ul#userList li:hover {
    color: #fff;
    background-color: #54728c;
-   text-shadow: 0 0 1px #fff;
+   text-shadow: 0 0 1px rgba(255,255,255,0.7);
 }
 ul#userList li.alternate:hover {
    color: #fff;
@@ -155,7 +155,7 @@ body.loading .ajaxmodal {
 /* Top Pane */
 .colorbar {
   background-color: #54728c;
-  height: 60px;
+  height: 50px;
   position: absolute;
   width: 100%;
   border-bottom: 1px solid #466176;
@@ -164,11 +164,11 @@ body.loading .ajaxmodal {
 
 #topPane {
   color: #fff;
-  height: 60px;
+  height: 50px;
   position: absolute;
   width: 100%;
   top: 0;
-  text-shadow: 0 0 1px #fff;
+  text-shadow: 0 0 1px rgba(255,255,255,0.5);
 }
 
 div.nameinput {
@@ -179,28 +179,36 @@ div.nameinput {
 #nameText {
   width: 100%;
   background-color: #f9f9f9;
-  border: 2px solid #dadada;
+  border: none;
   border-radius: 3px;
   font-family: 'Istok Web', sans-serif;
   font-size: 1rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
+  padding: 0 5px;
 }
 
 #topPane .left {
   height: 100%;
   width: 70%;
-  padding: 6px 16px;
+  padding: 1px 10px;
 }
 
 #topPane .logo {
   float: left;
   font-weight: bold;
   font-size: 35px;
+  text-shadow: 0 0 2px rgba(255,255,255,1);
+}
+
+#topPane .sublogo {
+  color: #e45857;
+  text-shadow: 0 0 1px #e45857;
+  font-weight: bold;
 }
 
 #topPane .right {
   width: 30%;
-  padding: 16px 22px;
+  padding: 11px 20px;
   border-left: 1px solid #466176;
 }
 
@@ -208,31 +216,29 @@ div.nameinput {
   float: left;
   font-weight: bold;
   font-size: 1.2rem;
-  text-shadow: 0 0 1px #fff;
-}
-
-.optionsarrow {
-  float: right;
-  background: transparent url(/public/images/settings.png) no-repeat;
-  height: 28px;
-  width: 30px;
+  width: 100%;
 }
 
 .optionsarrow a {
+  padding: 24px;
+  background-color: #54728c;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #54728c url(/public/images/settings.png) no-repeat center;
   text-decoration:none;
   display: block;
-  height: 100%;
 }
 
 .options {
   position: absolute;
   right: 0;
-  top: 60px;
+  top: 50px;
   background-color: #54728c;
   padding: 10px;
   border-left: 1px solid #466176;
   border-bottom: 1px solid #466176;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  box-shadow: rgb(100,100,100) 0px 8px 15px -3px;
   border-radius: 0 0 0 5px;
   font-weight: bold;
   display: none;
@@ -242,7 +248,7 @@ div.nameinput {
 #middle {
   margin: 0;
   height: 85%;
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 /* Input and Button Form */
@@ -258,4 +264,24 @@ div.form {
 }
 .left {
   float: left;
+}
+
+/* Given to text that should not be selectable */
+*.unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+
+/* Force one line */
+*.oneline {
+  overflow: hidden;
+  white-space: nowrap;
 }

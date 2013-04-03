@@ -173,7 +173,7 @@ $(document).ready(function() {
 				if(obj.success) {
 					name = $("#nameText").val();
 					$('.username').html(name);
-					$('.options').slideUp('fast');
+					$('.options').slideUp(100);
 					log.info("Changed username to " + name);
 					$("#nameText").val("");
 				} else {
@@ -186,7 +186,13 @@ $(document).ready(function() {
 	});
 
 	$('.optionsarrow a').on("click", function() {
-		$('.options').slideToggle('fast');
+		$('.options').slideToggle(100);
+	});
+
+	$('.username').on('dblclick', function(e) {
+		e.preventDefault();
+		$('.options').show();
+		$('#nameText').focus();
 	});
 
 
