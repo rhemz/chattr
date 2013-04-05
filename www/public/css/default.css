@@ -284,3 +284,55 @@ div.form {
   overflow: hidden;
   white-space: nowrap;
 }
+
+/* Home Page */
+.mainbutton {
+  width: 320px;
+  height: 100px;
+  background-color: #e45857;
+  background-image: -webkit-linear-gradient(top, #e45857, #e05453);
+  color: #fafafa;
+  font-family: 'Istok Web', sans-serif;
+  font-size: 28px;
+  border: 1px solid #d04443;
+  border-radius: 5px;
+}
+
+.mainbutton:hover {
+  background-color: #e05453;
+  background-image: -webkit-linear-gradient(top, #e05453, #db5050);
+  border: 1px solid #c03433;
+}
+.mainbutton:active {
+    background-color: #d04443;
+    background-image: -webkit-linear-gradient(top, #db5050, #d03938);
+    border: 1px solid #c03433;
+}
+
+.mainbuttondiv {
+  margin: 0 auto;
+  width: 320px;
+}
+.titlecopy {
+  margin: 0 auto;
+  width: 500px;
+  padding: 0 0 20px 0;
+  font-size: 22px;
+  text-align: center;
+}
+.centerwrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
+  background-color: #efece6;
+}
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+.homecontent {  
+  padding-bottom: 60px;
+}
+button {
+  cursor: pointer;
+}

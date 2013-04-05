@@ -4,7 +4,8 @@
 
 $(document).ready(function() {
 
-	$("#createRoom").click(function(e) {
+	$(".mainbutton").click(function(e) {
+		$('.homecontent').fadeOut();
 		$.ajax({
 			url: "/rest/room/create",
 			cache: false,
@@ -24,17 +25,24 @@ $(document).ready(function() {
 
 </script>
 
-<input type="button" id="createRoom" value="Create a Chatroom" />
-
-
-<p>
-	Your user_id: <?=$user->get_id()?>
-</p>
-
-<p>
-	Current theme: <?=$user->get_theme()?>
-</p>
-
-
+<div class="colorbar"></div>
+<div id="content">
+	<div id="topPane">
+		<div class="left"><span class="logo unselectable">Chattr</span><span class="sublogo unselectable">beta</span></div>
+	</div>
+	<div class="centerwrapper">
+		<div class="cell">
+			<div class="homecontent">
+				<div class="titlecopy">
+					<p>Create a new chat by clicking the button below.<br />It's <b>just that easy</b>.</p>
+					<p>Then <b>send the url</b> to anyone and they will be able to join you!</p>
+				</div>
+				<div class="mainbuttondiv">
+					<button class="mainbutton">Create New Chat</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <?php $this->load_view('common/footer'); ?>
