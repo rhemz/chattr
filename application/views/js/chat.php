@@ -104,6 +104,8 @@ function Chat() {
 
 $(document).ready(function() {
 
+	var currentUsers;
+
 	log.info("Current username: " + name);
 
 	$(window).focus(function() {
@@ -235,27 +237,59 @@ $(document).ready(function() {
 
 	function updateUsers(userList) {
 
-		$("#userList").empty();
+		var updateUserList = function() {
+			$("#userList").empty();
+			$.each(userList.users, function(index, value) {
 
-		$.each(userList.users, function(index, value) {
+				var r = $.grep(users, function(e) {
+					return e.id == value.id;
+				});
+				if(r.length == 1) {
+					r[0].checkName(value.name);
+				} else if(r.length == 0) {
+					users.push(new User(value));
+				}
 
-			var r = $.grep(users, function(e) {
-				return e.id == value.id;
+				// for now just wipe the select box entries and re-add them.  might cause flickering?
+				// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
+				// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
+				$("#userList").append('<li>' + value.name + '</li>');
+
 			});
-			if(r.length == 1) {
-				r[0].checkName(value.name);
-			} else if(r.length == 0) {
-				users.push(new User(value));
-			}
+		}
 
-			// for now just wipe the select box entries and re-add them.  might cause flickering?
-			// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
-			// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-			$("#userList").append('<li>' + value.name + '</li>');
-
-		});
+		// if current users has not been defined
+		if (currentUsers === undefined) {
+			currentUsers = userList;
+			updateUserList();
+		// if the known users does not match the sent users
+		} else if (currentUsers.users !== userList.users) {
+			userDiff(currentUsers.users, userList.users);
+			updateUserList();
+			currentUsers = userList;
+		}
 	}
 
+	function userDiff(oldUsers, newUsers) {
+		console.log(oldUsers);
+		console.log(newUsers);
+		if (oldUsers.length > newUsers.length) {
+			// look through each old user and see if its id stil exists
+			for (var i = 0; i < oldUsers.length; i++) {
+				if (newUsers.filter(function (user) { return user.id == oldUsers[i].id}).length === 0) {
+					var msg = "<span class=\"name\">" + oldUsers[i].name + "</span> has left the chat.</span>";					
+					chat.addSystemMessage(msg);					
+				}
+			}
+		} else if (oldUsers.length < newUsers.length) {
+			for (var i = 0; i < newUsers.length; i++) {
+				if (oldUsers.filter(function (user) { return user.id == newUsers[i].id}).length === 0) {
+					var msg = "<span class=\"name\">" + newUsers[i].name + "</span> has joined the chat.</span>";					
+					chat.addSystemMessage(msg);
+				}
+			}
+		}
+	}
 
 	/*
 		Message checker.
@@ -328,8 +362,6 @@ $(document).ready(function() {
 	}
 	getRoomParticipants();
 	setInterval(getRoomParticipants, <?=$this->config->get('chatroom.room_check_interval')?>);
-
-
 
 	// blink title
 	(function () {

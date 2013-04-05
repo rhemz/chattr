@@ -5,7 +5,7 @@
 $(document).ready(function() {
 
 	$(".mainbutton").click(function(e) {
-		$('.homecontent').fadeOut();
+		$('.homecontent').fadeOut(250);
 		$.ajax({
 			url: "/rest/room/create",
 			cache: false,
@@ -16,6 +16,7 @@ $(document).ready(function() {
 				// display some kind of fancy feedback that indicates success and take the user to the room page
 				window.location.href = "/room/" + obj.id; 
 			} else {
+				$('.homecontent').fadeIn(250);
 				alert("Something went horribly, horribly wrong!");
 			}
 		});
