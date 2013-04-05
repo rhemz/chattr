@@ -2,7 +2,7 @@
 
 class Message_Set
 {
-	private $messages;
+	private $messages = array();
 
 	public function __construct($db_result)
 	{
@@ -15,12 +15,15 @@ class Message_Set
 
 	public function get_messages($sanitized = true)
 	{
-		if($sanitized)
+		foreach($this->messages as &$message)
 		{
-			foreach($this->messages as $message)
+			if($sanitized)
 			{
-
+				$message->sanitize();
 			}
+			$message->prepare();
 		}
+
+		return $this->messages;
 	}
 }
