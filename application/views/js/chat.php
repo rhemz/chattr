@@ -114,6 +114,11 @@ $(document).ready(function() {
 		window_focus = false;
 	});
 
+	// scroll to bottom of chat on window resize
+	$(window).resize(function() {
+		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
+	});
+
 	if(t = ($.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true')) {
 		notifying = t;
 		$("#html5notify").attr('checked', t ? 'checked' : null);
@@ -271,8 +276,6 @@ $(document).ready(function() {
 	}
 
 	function userDiff(oldUsers, newUsers) {
-		console.log(oldUsers);
-		console.log(newUsers);
 		if (oldUsers.length > newUsers.length) {
 			// look through each old user and see if its id stil exists
 			for (var i = 0; i < oldUsers.length; i++) {
