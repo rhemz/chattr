@@ -8,7 +8,7 @@ class Message_Set
 	{
 		foreach($db_result->rows as $row)
 		{
-			$this->messages[] = new Chat_Message($row);
+			$this->messages[] = new Message($row);
 		}
 	}
 

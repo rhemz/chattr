@@ -54,8 +54,8 @@ class Message_Model extends Model
 
 			if($this->query($sql, array($user_id, $room_id, $timestamp, $timestamp)))
 			{
-				return new Message_Set($result);
-				// return $result;
+				// return new Message_Set($result);
+				return $result;
 			}
 		}
 		return false;
