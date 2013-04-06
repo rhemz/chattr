@@ -61,8 +61,7 @@ class Autoload
 				}
 				else
 				{
-					$this->tree[self::CM_Branch][] = $item->getPathname();
-					
+					$this->tree[self::CM_Branch][] = $item->getPathname();	
 				}
 				
 			}
