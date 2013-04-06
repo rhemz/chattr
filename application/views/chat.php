@@ -16,7 +16,11 @@
 			<div class="notification">
 				<input type="checkbox" id="html5notify" value="" />
 				<label for="html5notify">Enable Notifications</label>
-			</div>	
+			</div>
+			<div class="feelingDangerous">
+				<input type="checkbox" id="feelingDangerous" value="" />
+				<label for="feelingDangerous">Allow full HTML messages</label>
+			</div>
 			<div>
 				Current theme: <?=$user->get_theme()?>
 			</div>

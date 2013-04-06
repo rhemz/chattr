@@ -6,6 +6,7 @@ var users = new Array();
 var window_focus = true;
 var notification;
 var notifying = false;
+var feelingDangerous;
 
 
 /*
@@ -124,6 +125,13 @@ $(document).ready(function() {
 		$("#html5notify").attr('checked', t ? 'checked' : null);
 	}
 
+	/**
+	if(t = ($.cookie('<?=$this->config->get('chatroom.feelingdangous_cookie')?>') == 'true')) {
+		feelingDangerous = t;
+		$("#feelingDangerous").attr('checked', t ? 'checked' : null);
+	}
+	*/
+
 
 	$("#html5notify").click(function(e) {
 
@@ -143,6 +151,19 @@ $(document).ready(function() {
 				notifying = false;
 			}
 		}
+	});
+
+	/**
+	 * Handler for feeling dangerous checkbox
+	 */
+	$("#feelingDangerous").click(function(e) {
+		if($("#feelingDangerous").is(":checked")) {
+				$.cookie('<?=$this->config->get('chatroom.feelingdangous_cookie')?>', true, { expires: 365, path: '/' });
+				feelingDangerous = true;
+			} else {
+				$.cookie('<?=$this->config->get('chatroom.feelingdangous_cookie')?>', false, { expires: 365, path: '/' });
+				feelingDangerous = false;
+			}
 	});
 
 
@@ -281,7 +302,7 @@ $(document).ready(function() {
 			for (var i = 0; i < oldUsers.length; i++) {
 				if (newUsers.filter(function (user) { return user.id == oldUsers[i].id}).length === 0) {
 					var msg = "<span class=\"name\">" + oldUsers[i].name + "</span> has left the chat.</span>";					
-					chat.addSystemMessage(msg);					
+					chat.addSystemMessage(msg);
 				}
 			}
 		} else if (oldUsers.length < newUsers.length) {
