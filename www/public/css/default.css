@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Istok+Web:400,700,400italic,700italic');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700');
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
@@ -23,7 +23,7 @@ html, body {
 }
 
 body {
-  font-family: 'Istok Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   margin: 0;
@@ -35,7 +35,7 @@ p.systemMessage {
   margin: 0;
   margin-top: -1px;
   padding: 10px 20px;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0 0 1px rgba(255,255,255,0.7);
 }
 
@@ -54,7 +54,7 @@ p {
   color: #fff;
   border: 1px solid #519339;
   border-radius: 2px;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 16px;
   position: absolute;
   position: absolute;
@@ -74,7 +74,7 @@ textarea#inputText {
   background-color: #f9f9f9;
   border-top: 1px solid #dadada !important;
   border: none;
-  font-family: 'Istok Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   position: absolute;
@@ -84,7 +84,7 @@ textarea#inputText {
 }
 
 ul#userList li {
-   font-weight: bold;
+   font-weight: 700;
    margin: 0;
    padding: 10px 10px 10px 25px;
    color: #5d5d5d; 
@@ -139,7 +139,7 @@ body.loading .ajaxmodal {
   float: right;
 }
 .message .user {
-  font-weight: bold;
+  font-weight: 700;
   display: block;
 }
 .message .text {
@@ -180,7 +180,7 @@ div.nameinput {
   background-color: #f9f9f9;
   border: none;
   border-radius: 3px;
-  font-family: 'Istok Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   padding: 2px 5px;
@@ -194,7 +194,7 @@ div.nameinput {
 
 #topPane .logo {
   float: left;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 35px;
   text-shadow: 0 0 2px rgba(255,255,255,1);
 }
@@ -202,7 +202,7 @@ div.nameinput {
 #topPane .sublogo {
   color: #e45857;
   text-shadow: 0 0 1px #e45857;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 #topPane .right {
@@ -213,7 +213,7 @@ div.nameinput {
 
 #topPane .username {
   float: left;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.2rem;
   width: 100%;
 }
@@ -239,7 +239,7 @@ div.nameinput {
   border-bottom: 1px solid #466176;
   box-shadow: rgb(100,100,100) 0px 8px 15px -3px;
   border-radius: 0 0 0 5px;
-  font-weight: bold;
+  font-weight: 700;
   display: none;
 }
 
@@ -292,7 +292,7 @@ div.form {
   background-color: #e45857;
   background-image: -webkit-linear-gradient(top, #e45857, #e05453);
   color: #fafafa;
-  font-family: 'Istok Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 28px;
   border: 1px solid #d04443;
   border-radius: 5px;
@@ -335,4 +335,10 @@ div.form {
 }
 button {
   cursor: pointer;
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+/* Styles */
 }
