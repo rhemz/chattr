@@ -53,8 +53,8 @@ class Room_Controller extends Controller_Rest
 
 		if(($messages = $this->message_model->get_messages($room_id, $this->user->get_id())) !== false)
 		{
-			// Output::return_json(array('success' => true, 'messages' => $messages->get_messages()));
-			Output::return_json(array('success' => true, 'messages' => $messages->rows));
+			Output::return_json(array('success' => true, 'messages' => $messages->get_messages()));
+			// Output::return_json(array('success' => true, 'messages' => $messages->rows));
 		}
 
 		Output::return_json(array('success' => false, 'message' => 'A database error occurred trying to fetch chatroom messages'));

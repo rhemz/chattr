@@ -75,6 +75,15 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `mvcsession` ( 
+  `id` varchar(32) NOT NULL, 
+  `contents` longtext, 
+  `modify_date` int NOT NULL,
+PRIMARY KEY (`id`),
+KEY `modify_date` (`modify_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 /* Set up room pruner */
 SET GLOBAL event_scheduler = ON;
 

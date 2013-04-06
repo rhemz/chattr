@@ -5,7 +5,7 @@ require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'rz_mvc_exceptio
 require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'config' . PHP_EXT);
 require_once(FRAMEWORK_PATH . 'autoload' . PHP_EXT);
 
-$loader =& Autoloader::get_instance();
+$loader =& Autoload::get_instance();
 $loader->register();
 
 // load core framework and application configs
