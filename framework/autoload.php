@@ -1,7 +1,7 @@
 <?php
 
 
-class Autoloader
+class Autoload
 {
 	private static $instance;
 	private $tree = array(FRAMEWORK_PATH => array(), APPLICATION_PATH => array(), 'CM' => array());
@@ -27,7 +27,7 @@ class Autoloader
 	{
 		if(is_null(self::$instance))
 		{
-			self::$instance = new Autoloader();
+			self::$instance = new Autoload();
 		}
 		return self::$instance;
 	}
