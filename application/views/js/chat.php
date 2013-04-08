@@ -6,7 +6,7 @@ var users = new Array();
 var window_focus = true;
 var notification;
 var notifying = false;
-var feelingDangerous;
+var feelingDangerous = false;
 
 
 /*
@@ -120,21 +120,24 @@ $(document).ready(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
 	});
 
+
+	// set checked state for notifications option
 	if(t = ($.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true')) {
 		notifying = t;
 		$("#html5notify").attr('checked', t ? 'checked' : null);
 	}
 
-	/**
-	if(t = ($.cookie('<?=$this->config->get('chatroom.feelingdangous_cookie')?>') == 'true')) {
+	
+	// set checked state for html messages option
+	if(t = ($.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>') == 'true')) {
 		feelingDangerous = t;
 		$("#feelingDangerous").attr('checked', t ? 'checked' : null);
 	}
-	*/
+	
 
 
+	// notifications toggle option
 	$("#html5notify").click(function(e) {
-
 		if(window.webkitNotifications) {
 			if($("#html5notify").is(":checked")) {
 				if(window.webkitNotifications.checkPermission() != 0) {
@@ -153,15 +156,16 @@ $(document).ready(function() {
 		}
 	});
 
-	/**
-	 * Handler for feeling dangerous checkbox
-	 */
+	
+	// html messages toggle option
 	$("#feelingDangerous").click(function(e) {
 		if($("#feelingDangerous").is(":checked")) {
-				$.cookie('<?=$this->config->get('chatroom.feelingdangous_cookie')?>', true, { expires: 365, path: '/' });
+				$.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>', true, { expires: 365, path: '/' });
+				log.info("enabling raw messages");
 				feelingDangerous = true;
 			} else {
-				$.cookie('<?=$this->config->get('chatroom.feelingdangous_cookie')?>', false, { expires: 365, path: '/' });
+				$.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>', false, { expires: 365, path: '/' });
+				log.info("disabling raw messages");
 				feelingDangerous = false;
 			}
 	});
@@ -315,13 +319,13 @@ $(document).ready(function() {
 		}
 	}
 
+
 	/*
 		Message checker.
 	*/
-
 	function checkForMessages() {
 		$.ajax({
-			url: "/rest/room/<?=$room_id?>/messages",
+			url: "/rest/room/<?=$room_id?>/messages" + (feelingDangerous ? "?raw" : ""),
 			cache: false,
 			type: "GET",
 			timeout: <?=$this->config->get('chatroom.message_check_timeout')?>

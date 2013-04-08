@@ -104,7 +104,7 @@ class Input
 				$source =& $_POST;
 				break;
 		}
-		return isset($source[$key]) && !is_null($source[$key]) && strlen($source[$key]);
+		return isset($source[$key]) && !is_null($source[$key]);
 	}
 
 	/**

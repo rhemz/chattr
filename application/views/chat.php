@@ -19,7 +19,7 @@
 			</div>
 			<div class="feelingDangerous">
 				<input type="checkbox" id="feelingDangerous" value="" />
-				<label for="feelingDangerous">Allow full HTML messages</label>
+				<label for="feelingDangerous">Allow Raw Messages</label>
 			</div>
 			<div>
 				Current theme: <?=$user->get_theme()?>

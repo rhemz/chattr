@@ -13,15 +13,15 @@ class Message_Set
 	}
 
 
-	public function get_messages($sanitized = true)
+	public function get_messages($raw = false)
 	{
 		foreach($this->messages as &$message)
 		{
-			if($sanitized)
+			if(!$raw)
 			{
 				$message->sanitize();
+				$message->prepare();
 			}
-			$message->prepare();
 		}
 
 		return $this->messages;

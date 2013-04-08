@@ -22,6 +22,8 @@ $config['notification_path']		= '/public/images/notification.png';
 $config['notification_timeout']		= 8000;
 $config['notification_cookie']		= 'chattr_notify';
 
+$config['raw_messages_cookie']		= 'chattr_raw_messages';
+
 $config['title_blink']				= true;
 $config['title_blink_count']		= 10;
 $config['title_blink_delay']		= 1000;

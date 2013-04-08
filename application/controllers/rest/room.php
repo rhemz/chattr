@@ -41,6 +41,8 @@ class Room_Controller extends Controller_Rest
 
 	/**
 	* Get the incoming messages that have been sent to the chatroom since the last time the user polled.
+	* Returned messages will automatically be sanitized (htmlenticized and escaped) unless the ?h GET parameter
+	* is passed as true.
 	* @param string $room_id The unique chatroom ID
 	* @return mixed JSON 
 	*/
@@ -53,7 +55,8 @@ class Room_Controller extends Controller_Rest
 
 		if(($messages = $this->message_model->get_messages($room_id, $this->user->get_id())) !== false)
 		{
-			Output::return_json(array('success' => true, 'messages' => $messages->get_messages()));
+			$raw = Input::is_present('raw', 'get');
+			Output::return_json(array('success' => true, 'messages' => $messages->get_messages($raw)));
 			// Output::return_json(array('success' => true, 'messages' => $messages->rows));
 		}
 
