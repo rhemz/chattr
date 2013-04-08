@@ -4,7 +4,7 @@
 <div class="colorbar"></div>
 <div id="content">
 	<div id="topPane">
-		<div class="left"><span class="logo unselectable">Chattr</span><span class="sublogo unselectable">beta</span></div>
+		<div class="left"><a href="/"><span class="logo unselectable">Chattr</span></a><span class="sublogo unselectable">beta</span></div>
 		<div class="right">
 			<div class="username unselectable oneline"><?=$user->get_name()?></div>
 			<div class="optionsarrow"><a href="#"></a></div>

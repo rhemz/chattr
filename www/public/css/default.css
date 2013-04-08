@@ -2,9 +2,15 @@
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+html {  
+  font-size: 62.5%;
+}
+
 html, body {
   height: 100%;
 }
+
+a { color: inherit; }
 
 #mainChat {
   word-wrap: break-word;
@@ -20,18 +26,19 @@ html, body {
 	background-color: #f1f1f1;
 	height: 100%;
   border-left: 1px solid #dadada;
+  width: 30%;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
+  font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   margin: 0;
 }
 
 p.systemMessage {  
   color: #fff;
-	background-color: #e45857;
+  background-color: #e45857;
   margin: 0;
   margin-top: -1px;
   padding: 10px 20px;
@@ -55,7 +62,7 @@ p {
   border: 1px solid #519339;
   border-radius: 2px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.6rem;
   position: absolute;
   position: absolute;
   right: 10px;
@@ -75,7 +82,7 @@ textarea#inputText {
   border-top: 1px solid #dadada !important;
   border: none;
   font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
+  font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   position: absolute;
   left: 0;
@@ -181,7 +188,7 @@ div.nameinput {
   border: none;
   border-radius: 3px;
   font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
+  font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   padding: 2px 5px;
 }
@@ -190,12 +197,13 @@ div.nameinput {
   height: 100%;
   width: 70%;
   padding: 1px 10px;
+  text-decoration: none;
 }
 
 #topPane .logo {
   float: left;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 3.5rem;
   text-shadow: 0 0 2px rgba(255,255,255,1);
 }
 
@@ -206,6 +214,7 @@ div.nameinput {
 }
 
 #topPane .right {
+  height: 100%;
   width: 30%;
   padding: 11px 20px;
   border-left: 1px solid #466176;
@@ -214,7 +223,7 @@ div.nameinput {
 #topPane .username {
   float: left;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   width: 100%;
 }
 
@@ -239,8 +248,8 @@ div.nameinput {
   border-bottom: 1px solid #466176;
   box-shadow: rgb(100,100,100) 0px 8px 15px -3px;
   border-radius: 0 0 0 5px;
-  font-weight: 700;
   display: none;
+  z-index: 1;
 }
 
 /* Middle Pane */
@@ -267,16 +276,15 @@ div.form {
 
 /* Given to text that should not be selectable */
 *.unselectable {
-   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-
-   /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
-   -ms-user-select: none;
-   user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  /*
+   Introduced in IE 10.
+   See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Force one line */
@@ -291,9 +299,13 @@ div.form {
   height: 100px;
   background-color: #e45857;
   background-image: -webkit-linear-gradient(top, #e45857, #e05453);
+  background-image: -moz-linear-gradient(top, #e45857, #e05453);
+  background-image: -o-linear-gradient(top, #e45857, #e05453);
+  background-image: -ms-linear-gradient(top, #e45857, #e05453);
+  background-image: linear-gradient(top, #e45857, #e05453);
   color: #fafafa;
   font-family: 'Roboto', sans-serif;
-  font-size: 28px;
+  font-size: 2.8rem;
   border: 1px solid #d04443;
   border-radius: 5px;
 }
@@ -301,12 +313,20 @@ div.form {
 .mainbutton:hover {
   background-color: #e05453;
   background-image: -webkit-linear-gradient(top, #e05453, #db5050);
+  background-image: -moz-linear-gradient(top, #e05453, #db5050);
+  background-image: -o-linear-gradient(top, #e05453, #db5050);
+  background-image: -ms-linear-gradient(top, #e05453, #db5050);
+  background-image: linear-gradient(top, #e05453, #db5050);
   border: 1px solid #c03433;
 }
 .mainbutton:active {
-    background-color: #d04443;
-    background-image: -webkit-linear-gradient(top, #db5050, #d03938);
-    border: 1px solid #c03433;
+  background-color: #d04443;
+  background-image: -webkit-linear-gradient(top, #db5050, #d03938);
+  background-image: -moz-linear-gradient(top, #db5050, #d03938);
+  background-image: -o-linear-gradient(top, #db5050, #d03938);
+  background-image: -ms-linear-gradient(top, #db5050, #d03938);
+  background-image: linear-gradient(top, #db5050, #d03938);
+  border: 1px solid #c03433;
 }
 
 .mainbuttondiv {
@@ -317,7 +337,7 @@ div.form {
   margin: 0 auto;
   width: 500px;
   padding: 0 0 20px 0;
-  font-size: 22px;
+  font-size: 2.2rem;
   text-align: center;
 }
 .centerwrapper {
@@ -330,15 +350,81 @@ div.form {
   display: table-cell;
   vertical-align: middle;
 }
-.homecontent {  
-  padding-bottom: 60px;
-}
 button {
   cursor: pointer;
 }
 
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-/* Styles */
+/* If the screen is more than 1024 px wide, decrease user list width percentage */
+@media all and (min-width: 1023px) {
+  #userDiv, #topPane .right {
+    width: 20%;
+  }
+  #mainChat, #topPane .left {
+    width: 80%;
+  }
+}
+@media all and (min-width: 1750px) {
+  #userDiv, #topPane .right {
+    width: 15%;
+  }
+  #mainChat, #topPane .left {
+    width: 85%;
+  }
+}
+@media all and (max-width: 500px) {
+  #userDiv, #topPane .right {
+    width: 40%;
+  }
+  #mainChat, #topPane .left {
+    width: 60%;
+  }
+}
+
+@media all and (max-height: 500px) {
+  div.form {
+    height: 20%;
+  }
+  #middle {
+    height: 80%;
+  }
+}
+
+@media all and (max-height: 400px) {
+  div.form {
+    height: 30%;
+  }
+  #middle {
+    height: 70%;
+  }
+  html {  
+    font-size: 50%;
+  }
+  #topPane, .colorbar {
+    height: 40px;
+  }
+  #middle {
+    padding-top: 40px;
+  }
+  .optionsarrow a {
+    padding: 19px;
+  }
+  .button {
+    height: 35px;
+    width: 60px;
+  }
+  .options {
+    top: 40px;
+  }
+}
+
+@media all and (min-height: 1000px) {
+  div.form {
+    height: 10%;
+  }
+  #middle {
+    height: 90%;
+  }
+  .homecontent {
+    padding-bottom: 60px;
+  }
 }
