@@ -378,6 +378,16 @@ button {
   #mainChat, #topPane .left {
     width: 60%;
   }
+  .titlecopy {
+    width: 100%;
+  }
+  .mainbutton, .mainbuttondiv {
+    width: 250px;
+  }
+  .mainbutton {
+    height: 80px;
+    font-size: 2.2rem;
+  }
 }
 
 @media all and (max-height: 500px) {
