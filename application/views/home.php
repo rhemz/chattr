@@ -1,35 +1,10 @@
 <?php $this->load_view('common/header', array('title' => 'Welcome!')); // pass any more data you need to here w/ additional key/value pairs?>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-
-	$(".mainbutton").click(function(e) {
-		$('.homecontent').fadeOut(250);
-		$.ajax({
-			url: "/rest/room/create",
-			cache: false,
-			type: "POST"
-		}).done(function(response) {
-			var obj = jQuery.parseJSON(response);
-			if(obj.success) {
-				// display some kind of fancy feedback that indicates success and take the user to the room page
-				window.location.href = "/room/" + obj.id; 
-			} else {
-				$('.homecontent').fadeIn(250);
-				alert("Something went horribly, horribly wrong!");
-			}
-		});
-	});
-
-});
-
-</script>
+<?php $this->load_view('js/home', array('user' => $user)); ?>
 
 <div class="colorbar"></div>
 <div id="content">
 	<div id="topPane">
-		<div class="left"><span class="logo unselectable">Chattr</span><span class="sublogo unselectable">beta</span></div>
+		<div class="left"><span class="logo no-select">Chattr</span><span class="sublogo no-select">beta</span></div>
 	</div>
 	<div class="centerwrapper">
 		<div class="cell">
@@ -39,7 +14,7 @@ $(document).ready(function() {
 					<p>Then <b>send the url</b> to anyone and they will be able to join you!</p>
 				</div>
 				<div class="mainbuttondiv">
-					<button class="mainbutton">Create New Chat</button>
+					<button class="mainbutton no-select">Create New Chat</button>
 				</div>
 			</div>
 		</div>
