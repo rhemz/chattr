@@ -36,5 +36,13 @@ class User_Model extends Model
 		$sql = "UPDATE user SET `name` = ? WHERE id = ?";
 		return $this->query($sql, array($name, $user_id));
 	}
+
+
+	public function get_name($user_id)
+	{
+		$sql = "SELECT name FROM user WHERE id = ?";
+		$result = $this->query($sql, array($user_id));
+		return $result->num_rows() > 0 ? $result->rows[0]->name : null;
+	}
 	
 }

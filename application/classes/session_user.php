@@ -50,7 +50,10 @@ class Session_User
 
 	public function get_name()
 	{
-		return $this->mvc->session->get(self::User_Name_Key, $this->mvc->config->get(sprintf("%s.default_username_max", self::Config_Group)));
+		return $this->mvc->session->get(self::User_Name_Key, 
+			sprintf("%s%s", 
+				$this->mvc->config->get(sprintf("%s.default_username", self::Config_Group)),
+				$this->mvc->config->get(sprintf("%s.default_username_max", self::Config_Group))));
 	}
 
 
