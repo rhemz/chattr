@@ -1,12 +1,12 @@
 <?php $this->load_view('common/header', array('title' => 'Chatting.  Room name will eventually go here')); ?>
-
 <?php $this->load_view('js/chat', array('user' => $user, 'room_id' => $room_id)); ?>
+
 <div class="colorbar"></div>
 <div id="content">
 	<div id="topPane">
-		<div class="left"><a href="/"><span class="logo unselectable">Chattr</span></a><span class="sublogo unselectable">beta</span></div>
+		<div class="left"><a href="/"><span class="logo no-select">Chattr</span></a><span class="sublogo no-select">beta</span></div>
 		<div class="right">
-			<div class="username unselectable oneline"><?=$user->get_name()?></div>
+			<div class="username no-select oneline"><?=$user->get_name()?></div>
 			<div class="optionsarrow"><a href="#"></a></div>
 		</div>
 		<div class="options">
@@ -40,7 +40,7 @@
 		<div class="textarea">
 			<textarea id="inputText"></textarea>
 		</div>
-		<input class="button" type="button" value="Send" id="sendButton" />
+		<div role="button" id="sendButton" class="button">Send</div>
 	</div>
 </div>
 

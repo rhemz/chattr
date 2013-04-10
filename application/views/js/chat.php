@@ -120,7 +120,6 @@ $(document).ready(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
 	});
 
-
 	// set checked state for notifications option
 	if(t = ($.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true')) {
 		notifying = t;
@@ -133,8 +132,8 @@ $(document).ready(function() {
 		feelingDangerous = t;
 		$("#feelingDangerous").attr('checked', t ? 'checked' : null);
 	}
-	
 
+	$('#topPane .right, #middle, div.form').css('visibility','visible').hide().fadeIn(250);
 
 	// notifications toggle option
 	$("#html5notify").click(function(e) {

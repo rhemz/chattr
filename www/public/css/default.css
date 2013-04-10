@@ -12,12 +12,22 @@ html, body {
 
 a { color: inherit; }
 
+.no-select {  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 #mainChat {
   word-wrap: break-word;
 	overflow: auto;
 	width: 70%;
 	height: 100%;
 	float: left;
+  background-color: #fff;
 }
 
 
@@ -58,17 +68,41 @@ p {
 
 .button {
   background-color: #68b54d;
-  color: #fff;
   border: 1px solid #519339;
-  border-radius: 2px;
   font-weight: 700;
   font-size: 1.6rem;
-  position: absolute;
   position: absolute;
   right: 10px;
   bottom: 10px;
   height: 50px;
   width: 80px;
+  background-image: -moz-linear-gradient(top,#82CE67,#68b54d);
+  background-image: -webkit-linear-gradient(top,#82CE67,#68b54d);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#82CE67),color-stop(1,#68b54d));
+  background-image: linear-gradient(top,#82CE67,#68b54d);
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  color: #fff;
+  display: inline-block;
+  font-weight: bold;
+  padding: 13px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.08);
+}
+
+.button:hover, .button:active {
+  background-color: #5AA241;
+  background-image: -moz-linear-gradient(top,#7AC45F,#5AA241);
+  background-image: -webkit-linear-gradient(top,#7AC45F,#5AA241);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#7AC45F),color-stop(1,#5AA241));
+  background-image: linear-gradient(top,#7AC45F,#5AA241);
+}
+
+.button:active, .mainbutton:active {
+  -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
+  -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
 }
 
 .textarea {
@@ -156,6 +190,7 @@ body.loading .ajaxmodal {
 /* Content */
 #content {
   height: 100%;
+  background-color: #efece6;
 }
 
 /* Top Pane */
@@ -196,7 +231,7 @@ div.nameinput {
 #topPane .left {
   height: 100%;
   width: 70%;
-  padding: 1px 10px;
+  padding: 0 10px;
   text-decoration: none;
 }
 
@@ -218,6 +253,7 @@ div.nameinput {
   width: 30%;
   padding: 11px 20px;
   border-left: 1px solid #466176;
+  visibility: hidden;
 }
 
 #topPane .username {
@@ -257,6 +293,7 @@ div.nameinput {
   margin: 0;
   height: 85%;
   padding-top: 50px;
+  visibility: hidden;
 }
 
 /* Input and Button Form */
@@ -265,6 +302,7 @@ div.form {
   height: 15%;
   position: relative;
   margin-top: -1px;
+  visibility: hidden;
 }
 
 .right {
@@ -272,19 +310,6 @@ div.form {
 }
 .left {
   float: left;
-}
-
-/* Given to text that should not be selectable */
-*.unselectable {
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  /*
-   Introduced in IE 10.
-   See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-  */
-  -ms-user-select: none;
-  user-select: none;
 }
 
 /* Force one line */
@@ -319,15 +344,6 @@ div.form {
   background-image: linear-gradient(top, #e05453, #db5050);
   border: 1px solid #c03433;
 }
-.mainbutton:active {
-  background-color: #d04443;
-  background-image: -webkit-linear-gradient(top, #db5050, #d03938);
-  background-image: -moz-linear-gradient(top, #db5050, #d03938);
-  background-image: -o-linear-gradient(top, #db5050, #d03938);
-  background-image: -ms-linear-gradient(top, #db5050, #d03938);
-  background-image: linear-gradient(top, #db5050, #d03938);
-  border: 1px solid #c03433;
-}
 
 .mainbuttondiv {
   margin: 0 auto;
@@ -350,12 +366,12 @@ div.form {
   display: table-cell;
   vertical-align: middle;
 }
-button {
+button, .button {
   cursor: pointer;
 }
 
 /* If the screen is more than 1024 px wide, decrease user list width percentage */
-@media all and (min-width: 1023px) {
+@media all and (min-width: 1150px) {
   #userDiv, #topPane .right {
     width: 20%;
   }
@@ -371,7 +387,7 @@ button {
     width: 85%;
   }
 }
-@media all and (max-width: 500px) {
+@media all and (max-width: 700px) {
   #userDiv, #topPane .right {
     width: 40%;
   }
@@ -421,6 +437,7 @@ button {
   .button {
     height: 35px;
     width: 60px;
+    padding: 6px;
   }
   .options {
     top: 40px;
