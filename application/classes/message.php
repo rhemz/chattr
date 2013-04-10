@@ -27,15 +27,22 @@ class Message
 
 	public function prepare()
 	{
-		// make sure there is an http:// on all URLs
-		$this->text = preg_replace("/([^\w\/])(www\.[a-z0-9\-]+\.[a-z0-9\-]+)/i", "$1http://$2", ' ' . $this->text);
-		// make all URLs links
-		$this->text = preg_replace("/([\w]+:\/\/[\w-?&;#~=\.\/\@]+[\w\/])/i","<a target=\"_blank\" href=\"$1\">$1</A>", $this->text);
-		// make all emails hot links
-		$this->text = preg_replace("/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?))/i","<a href=\"mailto:$1\">$1</A>", $this->text);
+		
+		$youtube = new Message_Parser_Youtube($this->text);
 
+		// as more parsers are added, this logic will become more and more complex
 
-		// translate smileys to images, etc...
+		// if message is a youtube link, only generate the embed code
+		if($youtube->contains_key())
+		{
+			$this->text = $youtube->parse();
+		}
+		else
+		{
+			// load other parsers, continue logic
+			$url = new Message_Parser_Url($this->text);
+			$this->text = $url->parse();
+		}
 	}
 
 
