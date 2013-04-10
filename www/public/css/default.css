@@ -36,7 +36,9 @@ a { color: inherit; }
 	background-color: #f1f1f1;
 	height: 100%;
   border-left: 1px solid #dadada;
-  width: 30%;
+  width: 240px;
+  position: absolute;
+  right: 0px;
 }
 
 body {
@@ -230,7 +232,6 @@ div.nameinput {
 
 #topPane .left {
   height: 100%;
-  width: 70%;
   padding: 0 10px;
   text-decoration: none;
 }
@@ -250,7 +251,9 @@ div.nameinput {
 
 #topPane .right {
   height: 100%;
-  width: 30%;
+  width: 240px;
+  position: absolute;
+  right: 0;
   padding: 11px 20px;
   border-left: 1px solid #466176;
   visibility: hidden;
@@ -371,29 +374,8 @@ button, .button {
 }
 
 /* If the screen is more than 1024 px wide, decrease user list width percentage */
-@media all and (min-width: 1150px) {
-  #userDiv, #topPane .right {
-    width: 20%;
-  }
-  #mainChat, #topPane .left {
-    width: 80%;
-  }
-}
-@media all and (min-width: 1750px) {
-  #userDiv, #topPane .right {
-    width: 15%;
-  }
-  #mainChat, #topPane .left {
-    width: 85%;
-  }
-}
+
 @media all and (max-width: 700px) {
-  #userDiv, #topPane .right {
-    width: 40%;
-  }
-  #mainChat, #topPane .left {
-    width: 60%;
-  }
   .titlecopy {
     width: 100%;
   }
