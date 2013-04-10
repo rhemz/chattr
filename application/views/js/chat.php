@@ -118,7 +118,10 @@ $(document).ready(function() {
 	// scroll to bottom of chat on window resize
 	$(window).resize(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
+		$('#mainChat').outerWidth(document.width - 240);
 	});
+
+	$('#mainChat').outerWidth(document.width - 240);
 
 	// set checked state for notifications option
 	if(t = ($.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true')) {
