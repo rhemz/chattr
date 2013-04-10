@@ -32,8 +32,8 @@ class Session_User
 			}
 
 			$this->mvc->session->set(self::Session_Key, $id);
-			$this->mvc->session->set(self::User_Name_Key, $name);
 			$this->mvc->session->set(self::Theme_Key, $this->mvc->config->get('global.default_theme'));
+			$this->set_name($name);
 		}
 		
 	}
