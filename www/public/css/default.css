@@ -37,8 +37,10 @@ a { color: inherit; }
 	height: 100%;
   border-left: 1px solid #dadada;
   width: 240px;
+  right: 0;
   position: absolute;
-  right: 0px;
+  top: 0;
+  padding-top: 50px;
 }
 
 body {
@@ -203,6 +205,7 @@ body.loading .ajaxmodal {
   width: 100%;
   border-bottom: 1px solid #466176;
   top: 0;
+  z-index: 1;
 }
 
 #topPane {
@@ -212,6 +215,7 @@ body.loading .ajaxmodal {
   width: 100%;
   top: 0;
   text-shadow: 0 0 1px rgba(255,255,255,0.5);
+  z-index: 2;
 }
 
 div.nameinput {
