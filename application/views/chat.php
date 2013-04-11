@@ -31,7 +31,8 @@
 		<div id="mainChat"></div>
 
 		<div id="userDiv">
-			<ul id="userList"></ul>
+			<div class="heading">Users</div>
+			<ul id="userList"><li>Ricknonymous</li></ul>
 		</div>
 	</div>
 

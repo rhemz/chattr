@@ -120,6 +120,7 @@ $(document).ready(function() {
 	$(window).resize(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
 		$('#mainChat').outerWidth($(window).width() - 240);
+		$('#userDiv').css('padding-bottom', $('.form').height());
 	});
 
 	$('#mainChat').outerWidth($(window).width() - 240);
@@ -221,7 +222,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.optionsarrow a').on("click", function() {
+	$('.optionsarrow a').on('click', function() {
 		$('.options').slideToggle(100);
 	});
 
@@ -229,6 +230,10 @@ $(document).ready(function() {
 		e.preventDefault();
 		$('.options').show();
 		$('#nameText').focus();
+	});
+
+	$('#userDiv .heading').on('click', function() {
+
 	});
 
 	$('#inputText').focus();
@@ -284,7 +289,7 @@ $(document).ready(function() {
 				// for now just wipe the select box entries and re-add them.  might cause flickering?
 				// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
 				// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-				$("#userList").append('<li>' + value.name + '</li>');
+				$("#userList").append('<li id="' + value.id + '"">' + value.name + '<span class="message-icon"><span></li>');
 
 			});
 		}
