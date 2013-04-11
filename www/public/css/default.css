@@ -10,7 +10,7 @@ html, body {
   height: 100%;
 }
 
-a { color: inherit; }
+#topPane a { color: inherit; }
 
 .no-select {  
   -webkit-touch-callout: none;
@@ -33,7 +33,6 @@ a { color: inherit; }
 	float: left;
   background-color: #fff;
 }
-
 
 #userDiv {
 	overflow: auto;
@@ -234,6 +233,9 @@ body.loading .ajaxmodal {
 }
 .message .text {
   display: block;
+}
+.message .text object{
+  float: right;
 }
 
 /* Content */
