@@ -44,7 +44,8 @@ a { color: inherit; }
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "freight-sans-pro",sans-serif;
+  font-weight: 500;
   font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   margin: 0;
@@ -89,7 +90,7 @@ p {
   border-radius: 2px;
   color: #fff;
   display: inline-block;
-  font-weight: bold;
+  font-weight: 700;
   padding: 13px;
   text-align: center;
   text-shadow: 0 -1px 0 rgba(0,0,0,.08);
@@ -109,6 +110,14 @@ p {
   box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
 }
 
+.button .icon.send {
+  width: 22px;
+  height: 16px;
+  display: block;
+  background: transparent url(/public/images/send.png) no-repeat center;
+  margin: 3px 0 0 14px;
+}
+
 .textarea {
   height: 100%;
 }
@@ -119,7 +128,8 @@ textarea#inputText {
   background-color: #f9f9f9;
   border-top: 1px solid #dadada !important;
   border: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: "freight-sans-pro",sans-serif;
+  font-weight: 500;
   font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   position: absolute;
@@ -218,6 +228,10 @@ body.loading .ajaxmodal {
   z-index: 2;
 }
 
+#topPane a {
+  text-decoration: none;
+}
+
 div.nameinput {
   width: 100%;
   padding: 5px;
@@ -228,7 +242,8 @@ div.nameinput {
   background-color: #f9f9f9;
   border: none;
   border-radius: 3px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "freight-sans-pro",sans-serif;
+  font-weight: 500;
   font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   padding: 2px 5px;
@@ -242,9 +257,10 @@ div.nameinput {
 
 #topPane .logo {
   float: left;
-  font-weight: 700;
-  font-size: 3.5rem;
-  text-shadow: 0 0 2px rgba(255,255,255,1);
+  font-weight: 900;
+  font-size: 3.9rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  line-height: 1.2;
 }
 
 #topPane .sublogo {
@@ -336,7 +352,8 @@ div.form {
   background-image: -ms-linear-gradient(top, #e45857, #e05453);
   background-image: linear-gradient(top, #e45857, #e05453);
   color: #fafafa;
-  font-family: 'Roboto', sans-serif;
+  font-family: "freight-sans-pro",sans-serif;
+  font-weight: 500;
   font-size: 2.8rem;
   border: 1px solid #d04443;
   border-radius: 5px;
