@@ -66,7 +66,11 @@ function Chat() {
 	this.div = "#mainChat";
 
 	this.addUserMessage = function(msgObject) {
-		$(this.div).append(msgObject.messageHTML());
+		var messageDom = $(msgObject.messageHTML());
+		messageDom.css('visibility','visible').hide();
+		$(this.div).append(messageDom);
+		//$(this.div).children().last().fadeIn(250);
+		$(this.div).children().last().slideDown(250);
 		
 		openNotification(msgObject);
 
