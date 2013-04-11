@@ -40,7 +40,7 @@
 		<div class="textarea">
 			<textarea id="inputText"></textarea>
 		</div>
-		<div role="button" id="sendButton" class="button">Send</div>
+		<div role="button" id="sendButton" class="button"><span class="icon send"></span></div>
 	</div>
 </div>
 
