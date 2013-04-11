@@ -8,7 +8,6 @@ var notification;
 var notifying = false;
 var feelingDangerous = false;
 
-
 /*
 	Objects
 */
@@ -74,16 +73,26 @@ function Chat() {
 		
 		openNotification(msgObject);
 
-		$(this.div).animate( { scrollTop: $(this.div)[0].scrollHeight }, { queue: false, duration: 500 });
+		scrollToMessagesBottom();
 	}
 
 	this.addSystemMessage = function(message) {
-		$(this.div).append('<p class="systemMessage">' + message + '</p>');
+		var messageDom = $('<p class="systemMessage">' + message + '</p>');
+		messageDom.css('visibility','visible').hide();
+		$(this.div).append(messageDom);
+		$(this.div).children().last().slideDown('slow', 'custom');
 
 		//openNotification(message);
-
-		$(this.div).animate( { scrollTop: $(this.div)[0].scrollHeight }, { queue: false, duration: 500 });
+		
+		scrollToMessagesBottom();
 	}
+}
+
+function scrollToMessagesBottom() {
+	console.log($('#mainChat').scrollTop() + $('#mainChat').innerHeight() - $('#mainChat')[0].scrollHeight );
+	if ( Math.abs( $('#mainChat').scrollTop() + $('#mainChat').innerHeight() - $('#mainChat')[0].scrollHeight ) < 50) {
+		$('#mainChat').animate( { scrollTop: $('#mainChat')[0].scrollHeight }, { queue: false, duration: 500 });
+	}	
 }
 
 function openNotification(msgObject) {
@@ -333,7 +342,7 @@ $(document).ready(function() {
 			currentUsers = userList;
 			updateUserList();
 		// if the known users does not match the sent users
-		} else if (currentUsers.users !== userList.users) {
+		} else if (JSON.stringify(currentUsers.users) !== JSON.stringify(userList.users)) {
 			userDiff(currentUsers.users, userList.users);
 			updateUserList();
 			currentUsers = userList;

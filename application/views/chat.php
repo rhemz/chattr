@@ -32,7 +32,7 @@
 
 		<div id="userDiv">
 			<div class="heading">Users</div>
-			<ul id="userList"><li>Ricknonymous</li></ul>
+			<ul id="userList"></ul>
 		</div>
 	</div>
 
