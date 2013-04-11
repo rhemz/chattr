@@ -68,38 +68,38 @@ function Chat() {
 	this.addUserMessage = function(msgObject) {
 		$(this.div).append(msgObject.messageHTML());
 		
-		if(window.webkitNotifications && window.webkitNotifications.checkPermission() == 0 && !window_focus && notifying) {
-			if(notification != null) {
-				notification.cancel();
-			}
-			notification = window.webkitNotifications.createNotification(
-				'<?=$this->config->get('chatroom.notification_path')?>', 
-				'<?=$this->config->get('chatroom.notification_title')?>', 
-				msgObject.messageNotification());
+		openNotification(msgObject);
 
-			notification.ondisplay = function(e) {
-				setTimeout(function() { e.currentTarget.cancel(); }, <?=$this->config->get('chatroom.notification_timeout')?>);
-			}
-			notification.onclick = function() {
-				window.focus();
-				this.cancel();
-			}
-			notification.show();
-		}
-
-		$(this.div).animate({
-			scrollTop: $(this.div)[0].scrollHeight,
-			queue: false
-		}, 500);
+		$(this.div).animate( { scrollTop: $(this.div)[0].scrollHeight }, { queue: false, duration: 500 });
 	}
 
 	this.addSystemMessage = function(message) {
 		$(this.div).append('<p class="systemMessage">' + message + '</p>');
 
-		$(this.div).animate({
-			scrollTop: $(this.div)[0].scrollHeight,
-			queue: false
-		}, 500);
+		//openNotification(message);
+
+		$(this.div).animate( { scrollTop: $(this.div)[0].scrollHeight }, { queue: false, duration: 500 });
+	}
+}
+
+function openNotification(msgObject) {
+	if(window.webkitNotifications && window.webkitNotifications.checkPermission() == 0 && !window_focus && notifying) {
+		if(notification != null) {
+			notification.cancel();
+		}
+		notification = window.webkitNotifications.createNotification(
+			'<?=$this->config->get('chatroom.notification_path')?>', 
+			'<?=$this->config->get('chatroom.notification_title')?>', 
+			msgObject.messageNotification());
+
+		notification.ondisplay = function(e) {
+			setTimeout(function() { e.currentTarget.cancel(); }, <?=$this->config->get('chatroom.notification_timeout')?>);
+		}
+		notification.onclick = function() {
+			window.focus();
+			this.cancel();
+		}
+		notification.show();
 	}
 }
 
@@ -119,10 +119,10 @@ $(document).ready(function() {
 	// scroll to bottom of chat on window resize
 	$(window).resize(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
-		$('#mainChat').outerWidth(document.width - 240);
+		$('#mainChat').outerWidth($(window).width() - 240);
 	});
 
-	$('#mainChat').outerWidth(document.width - 240);
+	$('#mainChat').outerWidth($(window).width() - 240);
 
 	// set checked state for notifications option
 	if(t = ($.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true')) {
@@ -229,6 +229,8 @@ $(document).ready(function() {
 		$('.options').show();
 		$('#nameText').focus();
 	});
+
+	$('#inputText').focus();
 
 	function sendMessage(message) {
 
