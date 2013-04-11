@@ -90,15 +90,16 @@ function Chat() {
 		$(this.div).animate({
 			scrollTop: $(this.div)[0].scrollHeight,
 			queue: false
-		}, 'slow');
+		}, 500);
 	}
 
 	this.addSystemMessage = function(message) {
 		$(this.div).append('<p class="systemMessage">' + message + '</p>');
 
 		$(this.div).animate({
-			scrollTop: $(this.div)[0].scrollHeight
-		}, 'slow');
+			scrollTop: $(this.div)[0].scrollHeight,
+			queue: false
+		}, 500);
 	}
 }
 
