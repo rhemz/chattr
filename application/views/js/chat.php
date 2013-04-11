@@ -188,6 +188,7 @@ $(document).ready(function() {
 		if($("#inputText").val().length > 0) {
 			sendMessage($("#inputText").val());
 		}
+		$('#inputText').focus();
 	});
 
 	$("#nameText").on("keypress", function(e) {

@@ -137,6 +137,7 @@ textarea#inputText {
   top: 0;
   padding: 20px;
   resize: none;
+  overflow: auto;
 }
 
 ul#userList li {
