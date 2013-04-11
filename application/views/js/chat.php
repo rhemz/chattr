@@ -193,39 +193,45 @@ $(document).ready(function() {
 
 	$("#nameText").on("keypress", function(e) {
 		var nameString = $.trim($("#nameText").val());
-		if(e.which == 13 && nameString.length > <?=$this->config->get('user.username_min_length')?>) {
-			$.ajax({
-				url: "/rest/user/name",
-				cache: false,
-				type: "PUT",
-				timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
-				data: {username: nameString}
-			}).done(function(response) {
-				<?php if(ENVIRONMENT == Environment::Development): ?>
-					log.debug(response);
-				<?php endif; ?>
+		if(e.which == 13) {
+			if (nameString.length >= <?=$this->config->get('user.username_min_length')?>) {
+				$.ajax({
+					url: "/rest/user/name",
+					cache: false,
+					type: "PUT",
+					timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
+					data: {username: nameString}
+				}).done(function(response) {
+					<?php if(ENVIRONMENT == Environment::Development): ?>
+						log.debug(response);
+					<?php endif; ?>
 
-				
-				var obj = jQuery.parseJSON(response);
-				if(obj.success) {
-					name = nameString;
-					$('.username').html(name);
-					$('.options').slideUp(100);
-					log.info("Changed username to " + name);
-					$("#nameText").val("");
-				} else {
-					log.error("Error changing username: " + response);
-				}
+					
+					var obj = jQuery.parseJSON(response);
+					if(obj.success) {
+						name = nameString;
+						$('.username').html(name);
+						$('.options').slideUp(100);
+						log.info("Changed username to " + name);
+						$("#nameText").val("").removeClass('invalid');
+					} else {
+						log.error("Error changing username: " + response);
+						$("#nameText").val("").addClass('invalid');
+					}
 
-				$("#inputText, #sendButton").prop("disabled", false); 
-			});
-		} else {
-			console.log('User name not long enough');
+					$("#inputText, #sendButton").prop("disabled", false); 
+				});
+			} else {
+				console.log('User name not long enough');
+				$("#nameText").val("").addClass('invalid');
+				chat.addSystemMessage('The minimum username length is ' + <?=$this->config->get('user.username_min_length')?> + ' characters.');
+			}
 		}
 	});
 
 	$('.optionsarrow a').on('click', function() {
 		$('.options').slideToggle(100);
+		$("#nameText").val("").removeClass('invalid');
 	});
 
 	$('.username').on('dblclick', function(e) {
@@ -246,6 +252,8 @@ $(document).ready(function() {
 	$('#inputText').focus();
 
 	function sendMessage(message) {
+
+		message = $.trim(message);
 
 		$("#inputText").attr("value", "");
 

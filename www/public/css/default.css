@@ -21,6 +21,10 @@ a { color: inherit; }
   user-select: none;
 }
 
+.invalid {
+  border: solid 1px red !important;
+}
+
 #mainChat {
   word-wrap: break-word;
 	overflow: auto;
