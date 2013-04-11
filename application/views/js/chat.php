@@ -120,7 +120,6 @@ $(document).ready(function() {
 	$(window).resize(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
 		$('#mainChat').outerWidth($(window).width() - 240);
-		$('#userDiv').css('padding-bottom', $('.form').height());
 	});
 
 	$('#mainChat').outerWidth($(window).width() - 240);
@@ -233,7 +232,12 @@ $(document).ready(function() {
 	});
 
 	$('#userDiv .heading').on('click', function() {
+		// show/hide users
+	});
 
+	$('#userDiv').on('click', '.message-icon', function(e) {
+		var targetUserId = e.target.id;
+		startPrivateMessage(targetUserId);
 	});
 
 	$('#inputText').focus();
@@ -270,6 +274,10 @@ $(document).ready(function() {
 		});
 	}
 
+	function startPrivateMessage(userId) {
+		console.log(userId);
+	}
+
 
 	function updateUsers(userList) {
 
@@ -289,8 +297,7 @@ $(document).ready(function() {
 				// for now just wipe the select box entries and re-add them.  might cause flickering?
 				// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
 				// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-				$("#userList").append('<li id="' + value.id + '"">' + value.name + '<span class="message-icon"><span></li>');
-
+				$("#userList").append('<li>' + value.name + '<span  id="user' + value.id + '" class="message-icon no-select"></span></li>');
 			});
 		}
 
@@ -394,39 +401,40 @@ $(document).ready(function() {
 
 		});
 	}
+
 	getRoomParticipants();
 	setInterval(getRoomParticipants, <?=$this->config->get('chatroom.room_check_interval')?>);
 
 	// blink title
 	(function () {
 
-	var original = document.title;
-	var timeout;
+		var original = document.title;
+		var timeout;
 
-	window.flashTitle = function (newMsg, counter) {
-	    function step() {
-	        document.title = (document.title == original) ? newMsg : original;
+		window.flashTitle = function (newMsg, counter) {
+			function step() {
+				document.title = (document.title == original) ? newMsg : original;
 
-	        if (--counter > 0) {
-	            timeout = setTimeout(step, <?=$this->config->get('chatroom.title_blink_delay')?>);
-	        };
-	    };
+				if (--counter > 0) {
+					timeout = setTimeout(step, <?=$this->config->get('chatroom.title_blink_delay')?>);
+				};
+			};
 
-	    counter = parseInt(counter);
+			counter = parseInt(counter);
 
-	    if (isNaN(counter)) {
-	        counter = <?=$this->config->get('chatroom.title_blink_count')?>;
-	    };
+			if (isNaN(counter)) {
+				counter = <?=$this->config->get('chatroom.title_blink_count')?>;
+			};
 
-	    clearTimeout(timeout);
+			clearTimeout(timeout);
 
-	    step();
-	};
+			step();
+		};
 
-	window.cancelFlashTitle = function () {
-	    clearTimeout(timeout);
-	    document.title = original;
-	};
+		window.cancelFlashTitle = function () {
+			clearTimeout(timeout);
+			document.title = original;
+		};
 
 	}());
 
