@@ -192,13 +192,14 @@ $(document).ready(function() {
 	});
 
 	$("#nameText").on("keypress", function(e) {
-		if(e.which == 13 && $("#nameText").val().length > 0) {
+		var nameString = $.trim($("#nameText").val());
+		if(e.which == 13 && nameString.length > <?=$this->config->get('user.username_min_length')?>) {
 			$.ajax({
 				url: "/rest/user/name",
 				cache: false,
 				type: "PUT",
 				timeout: <?=$this->config->get('chatroom.message_send_timeout')?>,
-				data: {username: $("#nameText").val()}
+				data: {username: nameString}
 			}).done(function(response) {
 				<?php if(ENVIRONMENT == Environment::Development): ?>
 					log.debug(response);
@@ -207,7 +208,7 @@ $(document).ready(function() {
 				
 				var obj = jQuery.parseJSON(response);
 				if(obj.success) {
-					name = $("#nameText").val();
+					name = nameString;
 					$('.username').html(name);
 					$('.options').slideUp(100);
 					log.info("Changed username to " + name);
@@ -218,6 +219,8 @@ $(document).ready(function() {
 
 				$("#inputText, #sendButton").prop("disabled", false); 
 			});
+		} else {
+			console.log('User name not long enough');
 		}
 	});
 
