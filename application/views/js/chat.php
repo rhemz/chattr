@@ -150,11 +150,11 @@ $(document).ready(function() {
 	$('#mainChat').outerWidth($(window).width() - 240);
 
 	// set checked state for notifications option
-	if(t = ($.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true')) {
-		notifying = t;
-		$("#html5notify").attr('checked', t ? 'checked' : null);
+	if ( t = ( $.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true' ) ) {
+		setNotificationStateEnabled(t);
 	}
 
+	// Apply active styling to textarea div when input is selected
 	$('#inputText').on('focus blur', function(e) {
 		if (e.type === 'focus') {
 			$('.textarea').addClass('active');
@@ -162,7 +162,6 @@ $(document).ready(function() {
 			$('.textarea').removeClass('active');
 		}
 	});
-
 	
 	// set checked state for html messages option
 	if(t = ($.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>') == 'true')) {
@@ -170,27 +169,54 @@ $(document).ready(function() {
 		$("#feelingDangerous").attr('checked', t ? 'checked' : null);
 	}
 
+	var success = function() {
+		if (feelingDangerous === true) {
+			$.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>', false, { expires: 365, path: '/' });
+			feelingDangerous = false;
+			chat.addSystemMessage('Konami code entered. God mode disabled.');	
+		} else {
+			$.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>', true, { expires: 365, path: '/' });
+			feelingDangerous = true;
+			chat.addSystemMessage('Konami code entered. God mode enabled.');	
+		}
+		
+	}	
+	var konami = new Konami(success);
+
 	$('#topPane .right, #middle, div.form').css('visibility','visible').hide().fadeIn(250);
 
-	// notifications toggle option
-	$("#html5notify").click(function(e) {
-		if(window.webkitNotifications) {
-			if($("#html5notify").is(":checked")) {
-				if(window.webkitNotifications.checkPermission() != 0) {
-					log.info("requesting webkitNotifications permission");
-					window.webkitNotifications.requestPermission();
-				}
-
-				$.cookie('<?=$this->config->get('chatroom.notification_cookie')?>', true, { expires: 365, path: '/' });
-				notifying = true;
-
-			} else {
-				log.info("disabling webkitNotifications");
-				$.cookie('<?=$this->config->get('chatroom.notification_cookie')?>', false, { expires: 365, path: '/' });
-				notifying = false;
-			}
-		}
+	openMenu();
+	// Hide modal window on click
+	$('.modalbg').on('click', function() {
+		$('.innermodal').fadeOut(250, function() {
+			$('.modaloptions').fadeOut(250);
+		});		
 	});
+
+	if (window.webkitNotifications) {
+		// notifications toggle option
+		$("#notificationsButton").click(function(e) {
+			if(!notifying) {
+				notifying = true;
+				if(window.webkitNotifications.checkPermission() !== 0) {
+					window.webkitNotifications.requestPermission(function() {
+						if (window.webkitNotifications.checkPermission() === 0) {
+							setNotificationStateEnabled(true);
+						} else {
+							$('.enablenotifications p').html('You have permenantly denied notifications from this site.');
+						}
+					});
+				} else {
+					setNotificationStateEnabled(true);
+				}
+			} else {
+				setNotificationStateEnabled(false);
+			}
+		});
+	} else {
+		$("#notificationsButton").addClass('disabled');
+		$("#notificationsButton").html('Notifications not supported.');
+	}
 
 	
 	// html messages toggle option
@@ -224,8 +250,8 @@ $(document).ready(function() {
 		$('#inputText').focus();
 	});
 
-	$("#nameText").on("keypress", function(e) {
-		var nameString = $.trim($("#nameText").val());
+	$('#content').on('keypress', '.nameText', function(e) {
+		var nameString = $.trim($('.nameText').val());
 		if(e.which == 13) {
 			if (nameString.length >= <?=$this->config->get('user.username_min_length')?>) {
 				$.ajax({
@@ -242,35 +268,36 @@ $(document).ready(function() {
 					
 					var obj = jQuery.parseJSON(response);
 					if(obj.success) {
-						name = nameString;
-						$('.username').html(name);
-						$('.options').slideUp(100);
-						log.info("Changed username to " + name);
-						$("#nameText").val("").removeClass('invalid');
+						setUserName(nameString);
 					} else {
 						log.error("Error changing username: " + response);
-						$("#nameText").val("").addClass('invalid');
+						$(".nameText").val("").addClass('invalid');
 					}
 
 					$("#inputText, #sendButton").prop("disabled", false); 
 				});
 			} else {
 				console.log('User name not long enough');
-				$("#nameText").val("").addClass('invalid');
+				$(".nameText").val("").addClass('invalid');
 				chat.addSystemMessage('The minimum username length is ' + <?=$this->config->get('user.username_min_length')?> + ' characters.');
 			}
 		}
 	});
 
 	$('.optionsarrow a').on('click', function() {
-		$('.options').slideToggle(100);
-		$("#nameText").val("").removeClass('invalid');
+		openMenu();
 	});
 
 	$('.username').on('dblclick', function(e) {
 		e.preventDefault();
-		$('.options').show();
-		$('#nameText').focus();
+		var usernameDiv = $(this);
+		usernameDiv.html('<input type="text" class="nameText">');
+		var input = usernameDiv.children('input');
+		input.focus();
+		input.on('blur', function() {
+			usernameDiv.html(name);
+			input.off('blur');
+		});
 	});
 
 	$('#userDiv .heading').on('click', function() {
@@ -283,6 +310,33 @@ $(document).ready(function() {
 	});
 
 	$('#inputText').focus();
+
+	function setNotificationStateEnabled(enabled) {
+		if (enabled) {
+			$("#notificationsButton").addClass('enabled');
+			$("#notificationsButton").html('Disable Notifications');
+			$.cookie('<?=$this->config->get('chatroom.notification_cookie')?>', true, { expires: 365, path: '/' });
+			notifying = true;
+		} else {
+			$("#notificationsButton").removeClass('enabled');
+			$("#notificationsButton").html('Enable Notifications');
+			$.cookie('<?=$this->config->get('chatroom.notification_cookie')?>', false, { expires: 365, path: '/' });
+			notifying = false;
+		}
+	}
+
+	function setUserName(nameString) {
+		name = nameString;
+		$('.username').html(name);
+		$(".nameText").val("").removeClass('invalid');
+	}
+
+	function openMenu() {
+		$('.modaloptions').fadeIn(250, function() {
+			$('.innermodal').fadeIn(250);
+			$('.modaloptions .nameText').focus();
+		});
+	}
 
 	function sendMessage(message) {
 

@@ -6,7 +6,7 @@ html {
   font-size: 62.5%;
 }
 
-.textarea, #nameText, .button, .mainbutton, .logo, .colorbar, #middle, #topPane, .optionsarrow a { -webkit-transition: all 0.1s ease-in-out; }
+.textarea, .nameText, .button, .mainbutton, .logo, .colorbar, #middle, #topPane, .optionsarrow a { -webkit-transition: all 0.1s ease-in-out; }
 
 html, body {
   height: 100%;
@@ -68,6 +68,71 @@ body {
   overflow: hidden
 }
 
+.modaloptions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  display: none;
+}
+
+.modalbg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.innermodal {
+  width: 350px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #efece6;
+  position: relative;
+  top: 50%;
+  margin-top: -125px;
+  border-radius: 5px;
+  display: none;
+  box-shadow: 0 2px 5px black;
+  padding: 20px;
+}
+
+.innermodal p {
+  text-align: center;
+}
+
+#notificationsButton {
+  width: 100%;
+}
+
+.button.enabled {
+  background-color: #e45857;
+  background-image: -webkit-linear-gradient(top, #e45857, #e05453);
+  background-image: -moz-linear-gradient(top, #e45857, #e05453);
+  background-image: -o-linear-gradient(top, #e45857, #e05453);
+  background-image: -ms-linear-gradient(top, #e45857, #e05453);
+  background-image: linear-gradient(top, #e45857, #e05453);
+  border: 1px solid #d04443;
+}
+
+.button.enabled:hover {
+  background-color: #e05453;
+  background-image: -webkit-linear-gradient(top, #e05453, #db5050);
+  background-image: -moz-linear-gradient(top, #e05453, #db5050);
+  background-image: -o-linear-gradient(top, #e05453, #db5050);
+  background-image: -ms-linear-gradient(top, #e05453, #db5050);
+  background-image: linear-gradient(top, #e05453, #db5050);
+  border: 1px solid #c03433;
+}
+
+.setusername {
+  padding-bottom: 10px;
+}
+
 p.systemMessage {  
   color: #fff;
   background-color: #e45857;
@@ -94,11 +159,6 @@ p {
   border: 1px solid #519339;
   font-weight: 700;
   font-size: 1.6rem;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  height: 50px;
-  width: 80px;
   background-image: -moz-linear-gradient(top,#82CE67,#68b54d);
   background-image: -webkit-linear-gradient(top,#82CE67,#68b54d);
   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#82CE67),color-stop(1,#68b54d));
@@ -114,6 +174,32 @@ p {
   text-shadow: 0 -1px 0 rgba(0,0,0,.08);
 }
 
+.button.disabled, .button.disabled:active, .button.disabled:hover {
+  cursor: default;
+  color: #ddd;
+  background-color: #686868;
+  border: 1px solid #515151;
+  background-image: -moz-linear-gradient(top,#828282,#686868);
+  background-image: -webkit-linear-gradient(top,#828282,#686868);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#828282),color-stop(1,#686868));
+  background-image: linear-gradient(top,#828282,#686868);
+}
+
+#sendButton {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    height: 50px;
+    width: 80px;
+}
+#sendButton .icon.send {
+  width: 22px;
+  height: 16px;
+  display: block;
+  background: transparent url(/public/images/send.png) no-repeat center;
+  margin: 3px 0 0 14px;
+}
+
 .button:hover, .button:active {
   background-color: #5AA241;
   background-image: -moz-linear-gradient(top,#7AC45F,#5AA241);
@@ -126,14 +212,6 @@ p {
   -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
   -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
   box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
-}
-
-.button .icon.send {
-  width: 22px;
-  height: 16px;
-  display: block;
-  background: transparent url(/public/images/send.png) no-repeat center;
-  margin: 3px 0 0 14px;
 }
 
 .textarea {
@@ -151,6 +229,7 @@ p {
 textarea#inputText {
   height: 100%;
   width: 100%;
+  padding: 20px;
   background-color: #f9f9f9;
   border: none;
   font-family: "source-sans-pro",sans-serif;
@@ -158,8 +237,6 @@ textarea#inputText {
   font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   position: absolute;
-  left: 20px;
-  top: 20px;
   margin: 0;
   resize: none;
   overflow: auto;
@@ -169,13 +246,13 @@ textarea#inputText {
 }
 
 ul#userList li {
-   font-weight: 700;
-   margin: 0;
-   padding: 15px 10px 15px 15px;
-   color: #5d5d5d; 
-   border-top: 1px solid #ccc;
-   margin: 0 5px;
-   margin-top: -1px;
+  font-weight: 700;
+  margin: 0;
+  padding: 15px 5px 15px 10px;
+  color: #5d5d5d;
+  border-top: 1px solid #ccc;
+  margin: 0 10px;
+  margin-top: -1px;
 }
 .message-icon {
   display: block;
@@ -286,7 +363,7 @@ div.nameinput {
   padding: 5px;
 }
 
-#nameText {
+.nameText {
   width: 100%;
   background-color: #f9f9f9;
   border-radius: 3px;
@@ -299,10 +376,17 @@ div.nameinput {
   outline: none;
   border: 1px solid #54728c;
 }
-#nameText:focus {  
+.nameText:focus {  
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
   box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+}
+
+.username .nameText {
+  padding: 2px;
+  margin-top: -3px;
+  width: 170px;
+  z-index: 2;
 }
 
 #topPane .left {
