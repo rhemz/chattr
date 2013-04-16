@@ -155,6 +155,14 @@ $(document).ready(function() {
 		$("#html5notify").attr('checked', t ? 'checked' : null);
 	}
 
+	$('#inputText').on('focus blur', function(e) {
+		if (e.type === 'focus') {
+			$('.textarea').addClass('active');
+		} else {
+			$('.textarea').removeClass('active');
+		}
+	});
+
 	
 	// set checked state for html messages option
 	if(t = ($.cookie('<?=$this->config->get('chatroom.raw_messages_cookie')?>') == 'true')) {
@@ -285,6 +293,8 @@ $(document).ready(function() {
 		// some client side validation
 		if(message.length > <?=$this->config->get('message.max_length')?>) {
 			chat.addSystemMessage('The maximum message length you can send is <?=$this->config->get('message.max_length')?> characters');
+		} else {
+			scrollToMessagesBottom();
 		}
 		
 		$.ajax({

@@ -6,6 +6,8 @@ html {
   font-size: 62.5%;
 }
 
+.textarea, #nameText, .button, .mainbutton, .logo, .colorbar, #middle, #topPane, .optionsarrow a { -webkit-transition: all 0.1s ease-in-out; }
+
 html, body {
   height: 100%;
 }
@@ -135,25 +137,35 @@ p {
 }
 
 .textarea {
-  height: 100%;
+  height: 100%;  
+  background-color: #f9f9f9;
+}
+
+.textarea.active {  
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+  border: 1px solid #54728c;
 }
 
 textarea#inputText {
   height: 100%;
   width: 100%;
   background-color: #f9f9f9;
-  border-top: 1px solid #dadada !important;
   border: none;
   font-family: "source-sans-pro",sans-serif;
   font-weight: 500;
   font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   position: absolute;
-  left: 0;
-  top: 0;
-  padding: 20px;
+  left: 20px;
+  top: 20px;
+  margin: 0;
   resize: none;
   overflow: auto;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 ul#userList li {
@@ -277,13 +289,20 @@ div.nameinput {
 #nameText {
   width: 100%;
   background-color: #f9f9f9;
-  border: none;
   border-radius: 3px;
   font-family: "source-sans-pro",sans-serif;
   font-weight: 500;
   font-size: 1.6rem;
   text-shadow: 0 0 1px rgba(0,0,0,0.5);
   padding: 2px 5px;
+  border: none;
+  outline: none;
+  border: 1px solid #54728c;
+}
+#nameText:focus {  
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
 }
 
 #topPane .left {
@@ -353,6 +372,8 @@ div.nameinput {
   margin: 0;
   height: 85%;
   padding-top: 50px;
+  margin-bottom: 1px;
+  border-bottom: 1px solid #dadada;
   visibility: hidden;
 }
 
