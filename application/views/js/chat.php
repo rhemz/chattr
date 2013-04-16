@@ -191,9 +191,9 @@ $(document).ready(function() {
 	if ( name.indexOf('Anonymous') >= 0 ) {
 		openMenu();
 	}
-	
+
 	// Hide modal window on click
-	$('.modalbg').on('click', function() {
+	$('.modalbg, .innermodal .close').on('click', function() {
 		$('.innermodal').fadeOut(250, function() {
 			$('.modaloptions').fadeOut(250);
 		});		

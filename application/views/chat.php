@@ -39,6 +39,7 @@
 	<div class="modaloptions">
 		<div class="modalbg"></div>
 		<div class="innermodal">
+			<div class="close"></div>
 			<div class="setusername">
 				<p>Set your <b>username</b> or leave blank to randomly generate one.</p>
 				<input type="text" class="nameText" />
