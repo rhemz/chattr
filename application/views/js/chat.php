@@ -185,7 +185,13 @@ $(document).ready(function() {
 
 	$('#topPane .right, #middle, div.form').css('visibility','visible').hide().fadeIn(250);
 
-	openMenu();
+	/**
+	 * If the user has an anoymous name, prompt them to change it.
+	 */
+	if ( name.indexOf('Anonymous') >= 0 ) {
+		openMenu();
+	}
+	
 	// Hide modal window on click
 	$('.modalbg').on('click', function() {
 		$('.innermodal').fadeOut(250, function() {
@@ -215,7 +221,7 @@ $(document).ready(function() {
 		});
 	} else {
 		$("#notificationsButton").addClass('disabled');
-		$("#notificationsButton").html('Notifications not supported.');
+		$("#notificationsButton").html('Notifications not supported');
 	}
 
 	
