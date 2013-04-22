@@ -45,7 +45,7 @@ html, body {
 }
 
 #userDiv .heading {
-  padding: 11px;
+  padding: 5px;
   font-weight: 700;
   font-size: 2rem;
   background-color: #e45857;
@@ -617,6 +617,32 @@ button, .button {
   overflow: auto;
 }
 
+@media all and (max-width: 500px), (max-height: 400px) {
+  html {  
+    font-size: 50%;
+  }
+  #topPane, .colorbar {
+    height: 40px;
+  }
+  #middle {
+    padding-top: 40px;
+  }
+  .optionsarrow a {
+    padding: 19px;
+  }
+  .button, #sendButton {
+    height: 35px;
+    width: 60px;
+    padding: 6px;
+  }
+  .options {
+    top: 40px;
+  }
+  .message-icon {
+    height: 20px;
+  }
+}
+
 @media all and (max-height: 500px) {
   div.form {
     height: 20%;
@@ -632,26 +658,6 @@ button, .button {
   }
   #middle {
     height: 70%;
-  }
-  html {  
-    font-size: 50%;
-  }
-  #topPane, .colorbar {
-    height: 40px;
-  }
-  #middle {
-    padding-top: 40px;
-  }
-  .optionsarrow a {
-    padding: 19px;
-  }
-  .button {
-    height: 35px;
-    width: 60px;
-    padding: 6px;
-  }
-  .options {
-    top: 40px;
   }
 }
 
