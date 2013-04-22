@@ -6,7 +6,7 @@ html {
   font-size: 62.5%;
 }
 
-.textarea, .nameText, .button, .mainbutton, .logo, .colorbar, #middle, #topPane, .optionsarrow a { -webkit-transition: all 0.1s ease-in-out; }
+/*.textarea, .nameText, .button, .mainbutton, .logo, .colorbar, #middle, #topPane, .optionsarrow a { -webkit-transition: all 0.1s ease-in-out; }*/
 
 html, body {
   height: 100%;
@@ -42,6 +42,7 @@ html, body {
 	height: 100%;
   width: 240px;
   float: right;
+  box-shadow: inset 1px 0 0 #dadada;
 }
 
 #userDiv .heading {
