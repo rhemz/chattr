@@ -6,7 +6,6 @@
 	<div id="topPane">
 		<div class="left"><a href="/"><span class="logo no-select">Chattr</span></a><span class="sublogo no-select">beta</span></div>
 		<div class="right">
-			<div class="username no-select oneline"><?=$user->get_name()?></div>
 			<div class="optionsarrow"><a href="#"></a></div>
 		</div>
 		<!-- <div class="options">
@@ -28,12 +27,11 @@
 	</div>
 
 	<div id="middle">
-		<div id="mainChat"></div>
-
 		<div id="userDiv">
-			<div class="heading">Users</div>
+			<div class="heading no-select">Users</div>
 			<ul id="userList"></ul>
 		</div>
+		<div id="mainChat"></div>
 	</div>
 
 	<div class="modaloptions">

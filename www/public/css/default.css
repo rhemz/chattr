@@ -40,8 +40,8 @@ html, body {
 	overflow: auto;
 	background-color: #f1f1f1;
 	height: 100%;
-  border-left: 1px solid #dadada;
   width: 240px;
+  float: right;
 }
 
 #userDiv .heading {
@@ -57,6 +57,15 @@ html, body {
   color: #fafafa;
   border: 1px solid #d04443;
   display: none;
+}
+
+#userDiv .heading:hover {
+  background-color: #e05453;
+  background-image: -webkit-linear-gradient(top, #e05453, #db5050);
+  background-image: -moz-linear-gradient(top, #e05453, #db5050);
+  background-image: -o-linear-gradient(top, #e05453, #db5050);
+  background-image: -ms-linear-gradient(top, #e05453, #db5050);
+  background-image: linear-gradient(top, #e05453, #db5050);
 }
 
 body {
@@ -242,7 +251,7 @@ p {
   background-image: linear-gradient(top,#7AC45F,#5AA241);
 }
 
-.button:active, .mainbutton:active, .close:active {
+.button:active, .mainbutton:active, .close:active, #userDiv .heading:active {
   -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
   -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
   box-shadow: inset 0 2px 4px rgba(0,0,0,.24);
@@ -277,23 +286,36 @@ textarea#inputText {
   border: none;
   outline: none;
   background: transparent;
+  position: absolute;
+  left: 0;
 }
 
 ul#userList li {
   font-weight: 700;
   margin: 0;
-  padding: 15px 5px 15px 10px;
+  padding: 13px 20px 15px;
   color: #5d5d5d;
   border-top: 1px solid #ccc;
-  margin: 0 10px;
   margin-top: -1px;
 }
+
+ul#userList .currentuser {
+  background-color: #54728c;
+  color: white;
+}
+
 .message-icon {
   display: block;
   height: 25px;
-  width: 25px;
+  width: 16px;
   background: transparent url(/public/images/message-icon.png) no-repeat center;
   cursor: pointer;
+}
+.currentuser .message-icon {
+  background: transparent url(/public/images/message-icon-white.png) no-repeat center;
+}
+.editing .message-icon {
+  display: none;
 }
 #userList .message-icon {
   float: right;
@@ -443,16 +465,6 @@ div.nameinput {
   font-weight: 700;
 }
 
-#topPane .right {
-  height: 100%;
-  width: 240px;
-  position: absolute;
-  right: 0;
-  padding: 11px 20px;
-  border-left: 1px solid #466176;
-  visibility: hidden;
-}
-
 #topPane .username {
   float: left;
   font-weight: 700;
@@ -463,9 +475,6 @@ div.nameinput {
 .optionsarrow a {
   padding: 24px;
   background-color: #54728c;
-  position: absolute;
-  right: 0;
-  top: 0;
   background: #54728c url(/public/images/settings.png) no-repeat center;
   text-decoration:none;
   display: block;
@@ -490,8 +499,6 @@ div.nameinput {
   margin: 0;
   height: 85%;
   padding-top: 50px;
-  margin-bottom: 1px;
-  border-bottom: 1px solid #dadada;
   visibility: hidden;
 }
 
@@ -500,8 +507,8 @@ div.form {
   padding: 0;
   height: 15%;
   position: relative;
-  margin-top: -1px;
   visibility: hidden;
+  border-top: 1px solid #dadada;
 }
 
 .right {
@@ -583,6 +590,31 @@ button, .button {
     height: 80px;
     font-size: 2.2rem;
   }
+}
+
+/**
+ * Using javascript to add .mobile class to body on 500 width
+ */
+.mobile #userDiv {
+  height: auto;
+  width: 100%;
+  float: none;
+  overflow: hidden;
+}
+.mobile #userList {
+  overflow: auto;
+  box-shadow: #555 0px 0px 5px inset;
+}
+.mobile #mainChat {
+  width: 100%;
+}
+.mobile #userDiv .heading {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+.mobile #userDiv.expanded {
+  overflow: auto;
 }
 
 @media all and (max-height: 500px) {

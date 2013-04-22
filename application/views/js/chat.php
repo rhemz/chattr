@@ -141,18 +141,69 @@ $(document).ready(function() {
 		window_focus = false;
 	});
 
+	var mobileView = false;
+	var mobileSizeCheck = function() {
+		if ($(window).width() <= 500) {
+			$('body').addClass('mobile');
+			$('#mainChat').width('100%');
+			$('#mainChat').height($('#middle').height() - $('#userDiv').height());
+			mobileView = true;
+			return true;
+		} else {
+			$('body').removeClass('mobile');
+			$('#mainChat').outerWidth($(window).width() - 240);
+			$('#mainChat').height('100%');
+			mobileView = false;
+			return false;
+		}
+	};
+
+	var userDiv = $('#userDiv');
+	var userListOpen = false;
+	var usersListRefresh = function() {
+		if (mobileView) {
+			if (userListOpen) {
+				userDiv.addClass('expanded');
+				$('#userList').css({
+					'display': 'block',
+					'max-height': $('#middle').height() - $('#userDiv .heading').outerHeight()
+				});
+			} else {
+				userDiv.removeClass('expanded');
+				$('#userList').css('display', 'none');
+			}
+		} else {
+			$('#userList').css('display', 'block');
+		}
+	};
+
+	var openUserList = function (open) {
+		userListOpen = open;
+		usersListRefresh();
+	}
+
 	// scroll to bottom of chat on window resize
 	$(window).resize(function() {
 		$('#mainChat').scrollTop($('#mainChat')[0].scrollHeight);
-		$('#mainChat').outerWidth($(window).width() - 240);
+		mobileSizeCheck();
+		openUserList(false);
 	});
 
-	$('#mainChat').outerWidth($(window).width() - 240);
+	mobileSizeCheck();
 
 	// set checked state for notifications option
 	if ( t = ( $.cookie('<?=$this->config->get('chatroom.notification_cookie')?>') == 'true' ) ) {
 		setNotificationStateEnabled(t);
 	}
+	// when clicking users header, expand/collapse users list
+	userDiv.on('click', '.heading', function() {		
+		if (userDiv.hasClass('expanded')) {
+			openUserList(false);
+		} else {
+			openUserList(true);	
+		}
+		mobileSizeCheck();
+	});
 
 	// Apply active styling to textarea div when input is selected
 	$('#inputText').on('focus blur', function(e) {
@@ -259,6 +310,7 @@ $(document).ready(function() {
 	$('#content').on('keypress', '.nameText', function(e) {
 		var nameString = $.trim($('.nameText').val());
 		if(e.which == 13) {
+			$(this).blur();
 			if (nameString.length >= <?=$this->config->get('user.username_min_length')?>) {
 				$.ajax({
 					url: "/rest/user/name",
@@ -294,13 +346,15 @@ $(document).ready(function() {
 		openMenu();
 	});
 
-	$('.username').on('dblclick', function(e) {
+	$('body').on('dblclick', '.user<?=$user->get_id()?>', function(e) {
 		e.preventDefault();
 		var usernameDiv = $(this);
+		usernameDiv.parent().addClass('editing');
 		usernameDiv.html('<input type="text" class="nameText">');
 		var input = usernameDiv.children('input');
 		input.focus();
 		input.on('blur', function() {
+			usernameDiv.parent().removeClass('editing');
 			usernameDiv.html(name);
 			input.off('blur');
 		});
@@ -403,7 +457,14 @@ $(document).ready(function() {
 				// for now just wipe the select box entries and re-add them.  might cause flickering?
 				// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
 				// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-				$("#userList").append('<li>' + value.name + '<span  id="user' + value.id + '" class="message-icon no-select"></span></li>');
+				var userDom = $('<li><span class="user' + value.id + '">' + value.name + '</span><span  id="user' + value.id + '" class="message-icon no-select"></span></li>');
+				if (value.id == <?=$user->get_id()?>) {
+					userDom.addClass('currentuser');
+				}
+				$("#userList").append(userDom);
+				usersListRefresh();
+				
+
 			});
 		}
 
