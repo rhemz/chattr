@@ -46,7 +46,7 @@
 				<p>Current theme: <?=$user->get_theme()?></p>
 			</div> -->
 			<div class="enablenotifications">
-				<p>Click below to enable <b>notifications</b></p>
+				<p>Click below to <b>enable</b> notifications</p>
 				<div role="button" id="notificationsButton" class="button">Enable Notifications</div>
 			</div>
 		</div>

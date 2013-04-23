@@ -373,11 +373,13 @@ $(document).ready(function() {
 	function setNotificationStateEnabled(enabled) {
 		if (enabled) {
 			$("#notificationsButton").addClass('enabled');
+			$(".enablenotifications p").html('Click below to <b>disable</b> notifications');
 			$("#notificationsButton").html('Disable Notifications');
 			$.cookie('<?=$this->config->get('chatroom.notification_cookie')?>', true, { expires: 365, path: '/' });
 			notifying = true;
 		} else {
 			$("#notificationsButton").removeClass('enabled');
+			$(".enablenotifications p").html('Click below to <b>enable</b> notifications');
 			$("#notificationsButton").html('Enable Notifications');
 			$.cookie('<?=$this->config->get('chatroom.notification_cookie')?>', false, { expires: 365, path: '/' });
 			notifying = false;
