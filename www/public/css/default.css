@@ -620,7 +620,7 @@ button, .button {
 
 @media all and (max-width: 500px), (max-height: 400px) {
   html {  
-    font-size: 50%;
+    font-size: 53%;
   }
   #topPane, .colorbar {
     height: 40px;
