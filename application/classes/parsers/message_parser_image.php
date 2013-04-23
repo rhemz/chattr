@@ -16,6 +16,9 @@ class Message_Parser_Image extends Message_Parser_Base
 
 	public function parse()
 	{
+		// make sure there is an http:// on all URLs
+		$this->text = preg_replace("/([^\w\/])(www\.[a-z0-9\-]+\.[a-z0-9\-]+)/i", "$1http://$2", ' ' . $this->text);
+		
 		$this->text = sprintf('<img src="%s" class="embedded" />', $this->text);
 
 		return $this->text;
