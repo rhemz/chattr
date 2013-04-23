@@ -17,6 +17,7 @@ class Message_Set
 	{
 		foreach($this->messages as &$message)
 		{
+			// going to have to look at the order of operations in here, some parsers generate HTML, don't want to sanitize/escape them
 			if(!$raw)
 			{
 				$message->sanitize();

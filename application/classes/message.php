@@ -29,6 +29,7 @@ class Message
 	{
 		
 		$youtube = new Message_Parser_Youtube($this->text);
+		$image = new Message_Parser_Image($this->text);
 
 		// as more parsers are added, this logic will become more and more complex
 
@@ -36,6 +37,11 @@ class Message
 		if($youtube->contains_key())
 		{
 			$this->text = $youtube->parse();
+		}
+		// if a message is a single image URL, display the image
+		else if($image->contains_key())
+		{
+			$this->text = $image->parse();
 		}
 		else
 		{
