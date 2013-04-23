@@ -69,11 +69,24 @@ function Chat() {
 		messageDom.css('visibility','visible').hide();
 		$(this.div).append(messageDom);
 		//$(this.div).children().last().fadeIn(250);
-		$(this.div).children().last().slideDown('slow', 'custom');
-		
-		openNotification(msgObject);
 
-		scrollToMessagesBottom();
+		if ($(this.div).children().last().find('img').length > 0) {
+			var instance = this;
+			$(this.div).children().last().find('img').imagesLoaded(function (e) {
+				$(instance.div).children().last().slideDown(250);
+				scrollToMessagesBottom();
+			});
+		} else if ($(this.div).children().last().find('iframe').length > 0) {
+			$(this.div).children().last().find('iframe').wrap('<div class="videoWrapper" />');
+			// create div and move iframe to that
+			$(this.div).children().last().slideDown(250);
+			scrollToMessagesBottom();
+		} else {
+			$(this.div).children().last().slideDown(500, 'custom');
+			scrollToMessagesBottom();
+		}
+
+		openNotification(msgObject);
 	}
 
 	this.addSystemMessage = function(message) {
@@ -91,7 +104,7 @@ function Chat() {
 function scrollToMessagesBottom() {
 	console.log($('#mainChat').scrollTop() + $('#mainChat').innerHeight() - $('#mainChat')[0].scrollHeight );
 	if ( Math.abs( $('#mainChat').scrollTop() + $('#mainChat').innerHeight() - $('#mainChat')[0].scrollHeight ) < 50) {
-		$('#mainChat').animate( { scrollTop: $('#mainChat')[0].scrollHeight }, { queue: false, duration: 500 });
+		$('#mainChat').animate( { scrollTop: $('#mainChat')[0].scrollHeight }, { queue: false, duration: 600 });
 	}	
 }
 
@@ -118,6 +131,25 @@ function openNotification(msgObject) {
 
 
 $(document).ready(function() {
+
+	$.fn.imagesLoaded = function(callback, fireOne) {
+		var	args = arguments,
+		elems = this.filter('img'),
+		elemsLen = elems.length - 1;
+
+		elems.bind('load', function(e) {
+			if (fireOne) {
+				!elemsLen-- && callback.call(elems, e);
+			} else {
+				callback.call(this, e);
+			}
+		}).each(function() {
+			// cached images don't fire load sometimes, so we reset src.
+			if (this.complete || this.complete === undefined){
+				this.src = this.src;
+			}
+		});
+	}
 
 	$.easing.custom = function (x, t, b, c, d) {
         if ((t/=d) < (1/2.75)) {

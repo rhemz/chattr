@@ -307,11 +307,23 @@ ul#userList .currentuser {
 
 .message .text img {
   max-width: 100%;
-  padding: 5px;
+  padding: 10px;
   margin: 10px 0 3px;
   box-shadow: 0 3px 10px #bbb;
 }
-
+.message .text .videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+.message .text iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .message-icon {
   display: block;
   height: 25px;
@@ -514,6 +526,7 @@ div.form {
   position: relative;
   visibility: hidden;
   border-top: 1px solid #dadada;
+  margin-top: -1px;
 }
 
 .right {

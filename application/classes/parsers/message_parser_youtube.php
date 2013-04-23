@@ -27,16 +27,7 @@ class Message_Parser_Youtube extends Message_Parser_Base
     ~ix';
 
     const Replace_Regex = 
-    '<object width="425" height="344">
-    <param name="movie" value="http://www.youtube.com/v/$1?fs=1"</param>
-    <param name="allowFullScreen" value="true"></param>
-    <param name="allowScriptAccess" value="always"></param>
-    <embed src="http://www.youtube.com/v/$1?fs=1"
-        type="application/x-shockwave-flash" allowscriptaccess="always" width="425" height="344">
-    </embed>
-    </object>';
-
-
+    '<iframe width="853" height="480" src="http://www.youtube-nocookie.com/embed/$1" frameborder="0" allowfullscreen></iframe>';
 
 	public function contains_key()
 	{
