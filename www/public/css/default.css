@@ -73,7 +73,7 @@ body {
   font-family: "source-sans-pro",sans-serif;
   font-weight: 500;
   font-size: 1.6rem;
-  /*text-shadow: 0 0 1px rgba(0,0,0,0.5);*/
+  text-shadow: 0 0 1px rgba(0,0,0,0.4);
   margin: 0;
   overflow: hidden
 }
@@ -279,7 +279,7 @@ textarea#inputText {
   font-family: "source-sans-pro",sans-serif;
   font-weight: 500;
   font-size: 1.6rem;
-  text-shadow: 0 0 1px rgba(0,0,0,0.5);
+  text-shadow: 0 0 1px rgba(0,0,0,0.4);
   position: absolute;
   margin: 0;
   resize: none;
@@ -443,7 +443,7 @@ div.nameinput {
   font-family: "source-sans-pro",sans-serif;
   font-weight: 500;
   font-size: 1.6rem;
-  text-shadow: 0 0 1px rgba(0,0,0,0.5);
+  text-shadow: 0 0 1px rgba(0,0,0,0.4);
   padding: 2px 5px;
   border: none;
   outline: none;
