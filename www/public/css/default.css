@@ -307,6 +307,9 @@ ul#userList .currentuser {
 
 .message .text img {
   max-width: 100%;
+  padding: 5px;
+  margin: 10px 0 3px;
+  box-shadow: 0 3px 10px #bbb;
 }
 
 .message-icon {
