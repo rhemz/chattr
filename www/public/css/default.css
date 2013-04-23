@@ -305,6 +305,10 @@ ul#userList .currentuser {
   color: white;
 }
 
+.message .text img {
+  max-width: 100%;
+}
+
 .message-icon {
   display: block;
   height: 25px;

@@ -462,7 +462,7 @@ $(document).ready(function() {
 				// for now just wipe the select box entries and re-add them.  might cause flickering?
 				// http://stackoverflow.com/questions/646317/how-can-i-check-whether-a-option-already-exist-in-select-by-jquery
 				// http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation
-				var userDom = $('<li><span class="user' + value.id + '">' + value.name + '</span><span  id="user' + value.id + '" class="message-icon no-select"></span></li>');
+				var userDom = $('<li><span class="name user' + value.id + '">' + value.name + '</span><span  id="user' + value.id + '" class="message-icon no-select"></span></li>');
 				if (value.id == <?=$user->get_id()?>) {
 					userDom.addClass('currentuser');
 				}
