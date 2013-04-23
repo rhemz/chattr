@@ -384,9 +384,6 @@ body.loading .ajaxmodal {
 .message .text {
   display: block;
 }
-.message .text object{
-  float: right;
-}
 
 /* Content */
 #content {
