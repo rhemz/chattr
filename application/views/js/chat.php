@@ -245,9 +245,7 @@ $(document).ready(function() {
 
 	// Hide modal window on click
 	$('.modalbg, .innermodal .close').on('click', function() {
-		$('.innermodal').fadeOut(250, function() {
-			$('.modaloptions').fadeOut(250);
-		});		
+		closeMenu();
 	});
 
 	if (window.webkitNotifications) {
@@ -311,6 +309,7 @@ $(document).ready(function() {
 		var nameString = $.trim($('.nameText').val());
 		if(e.which == 13) {
 			$(this).blur();
+			closeMenu();
 			if (nameString.length >= <?=$this->config->get('user.username_min_length')?>) {
 				$.ajax({
 					url: "/rest/user/name",
@@ -395,6 +394,12 @@ $(document).ready(function() {
 		$('.modaloptions').fadeIn(250, function() {
 			$('.innermodal').fadeIn(250);
 			$('.modaloptions .nameText').focus();
+		});
+	}
+
+	function closeMenu() {
+		$('.innermodal').fadeOut(250, function() {
+			$('.modaloptions').fadeOut(250);
 		});
 	}
 
