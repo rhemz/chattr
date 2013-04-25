@@ -39,42 +39,54 @@
 	<div class="options-menu">
 
 		<div class="notch"></div>
-		
-		<div class="change-name">
-			<span>Name:</span>
-			<input type="text" class="nameText" />
+
+		<div class="title">
+			<span>Options</span>
 		</div>
+
+		<div class="options-list">
 		
-		<div class="notifications">
-			<span>HTML5 Notifications:</span>
-			<input type="checkbox" checked name="notifications" value="Enabled">
-		</div>
-		
-		<div class="raw-messages">
-			<span>Raw HTML messages:</span>
-			<input type="checkbox" checked name="rawmessages" value="Enabled">
-		</div>
-		
-		<div class="enable-animations">
-			<span>Animations:</span>
-			<input type="checkbox" checked name="animation" value="Enabled">
-		</div>
-		
-		<div class="embed-images">
-			<span>Image embedding:</span>
-			<input type="checkbox" checked name="images" value="Enabled">
-		</div>
-		
-		<div class="embed-video">
-			<span>Video embedding:</span>
-			<input type="checkbox" checked name="video" value="Enabled">
-		</div>
-		
-		<div class="change-theme">
-			<span>Theme:</span>
-			<select>
-				<option value="default">Default</option>
-			</select>
+			<div class="change-name">
+				<input type="text" class="nameText" placeholder="User name" />
+			</div>
+
+			<div class="notifications">
+				<span>HTML5 Notifications</span>
+				<input type="checkbox" checked name="notifications" value="Enabled">
+			</div>
+			
+			<div class="embed-images">
+				<span>Image embedding</span>
+				<input type="checkbox" checked name="images" value="Enabled">
+			</div>
+			
+			<div class="embed-video">
+				<span>Video embedding</span>
+				<input type="checkbox" checked name="video" value="Enabled">
+			</div>
+
+			<div class="sounds">
+				<span>Enable Sound</span>
+				<input type="checkbox" checked name="sounds" value="Enabled">
+			</div>
+			
+			<div class="enable-animations">
+				<span>Animations</span>
+				<input type="checkbox" checked name="animation" value="Enabled">
+			</div>
+			
+			<div class="raw-messages">
+				<span>Raw HTML messages</span>
+				<input type="checkbox" name="rawmessages" value="Enabled">
+			</div>
+			
+			<div class="change-theme">
+				<span>Theme</span>
+				<select>
+					<option value="default">Default</option>
+				</select>
+			</div>
+
 		</div>
 
 		<div role="button" id="optionsSubmit" class="button options-submit">Finish</div>

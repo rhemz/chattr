@@ -203,7 +203,7 @@ p.systemMessage {
   margin-top: -1px;
   padding: 10px 20px;
   font-weight: 700;
-  text-shadow: 0 0 1px rgba(255,255,255,0.7);
+  text-shadow: none;
 }
 
 p {
@@ -716,37 +716,57 @@ button, .button, .icon.edit {
   background-color: #efece6;
   position: absolute;
   border-radius: 5px;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-  width: 280px;
-  padding: 20px;
-  top: 45px;
-  right: 5px;
+  box-shadow: 0 1px 7px -2px rgba(0,0,0,0.5);
+  padding: 10px 20px 20px;
+  top: 4px;
+  right: 50px;
   z-index: 5;
-  display: none;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
-.options-menu input, .options-menu select {
+.options-menu input {
+  float: left;
+  margin-right: 10px;
+}
+.options-menu select {
   float: right;
 }
 .options-menu div {
-  padding: 5px 0;
+  padding: 7px 0;
+}
+.options-menu .options-list {
+  font-size: 1.3rem;
+}
+.options-menu .options-list div:hover {
+  background-color: #ccc;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .options-menu .nameText {
-  margin-top: -4px;
-  width: auto;
+  margin-top: -2px;
 }
-.options-menu .options-submit {
+.options-menu div.options-submit {
   width: 100%;
-  margin-top: 15px;
 }
-.notch {
+.options-menu div.notch {
   position: absolute;
-  top: -20px;
-  right: 9px;
-  border-top: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #efece6;
+  top: 10px;
+  right: -10px;
+  border-top: 10px solid transparent;
+  border-left: 10px solid #efece6;
+  border-right: 0;
+  border-bottom: 10px solid transparent;
   width: 0;
   height: 0;
+  padding: 0;
+  margin: 0;
+}
+.options-menu .title {
+  text-align: center;
+  padding: 0;
+}
+.options-menu .change-name {
+  height: 40px;
 }
