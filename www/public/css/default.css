@@ -723,6 +723,7 @@ button, .button, .icon.edit {
   z-index: 5;
   text-transform: uppercase;
   font-weight: 700;
+  display: none;
 }
 
 .options-menu input {
