@@ -1,12 +1,16 @@
 <script type="text/javascript">
 
 var name = "<?=$user->get_name()?>";
+var soundsEnabled = true;
 var chat = new Chat();
 var users = new Array();
 var window_focus = true;
 var notification;
 var notifying = false;
 var feelingDangerous = false;
+var messageSound = ['/public/sounds/standard_msg_receive.mp3', '/public/sounds/standard_msg_receive.ogg'];
+var joinSound = ['/public/sounds/join_chat.mp3', '/public/sounds/join_chat.ogg'];
+var leaveSound = ['/public/sounds/leave_chat.mp3', '/public/sounds/leave_chat.ogg'];
 
 /*
 	Objects
@@ -75,15 +79,18 @@ function Chat() {
 			$(this.div).children().last().find('img').imagesLoaded(function (e) {
 				$(instance.div).children().last().slideDown(250);
 				scrollToMessagesBottom();
+				instance.playMessageSound();
 			});
 		} else if ($(this.div).children().last().find('iframe').length > 0) {
 			$(this.div).children().last().find('iframe').wrap('<div class="videoWrapper" />');
 			// create div and move iframe to that
 			$(this.div).children().last().slideDown(250);
 			scrollToMessagesBottom();
+			this.playMessageSound();
 		} else {
 			$(this.div).children().last().slideDown(500, 'custom');
 			scrollToMessagesBottom();
+			this.playMessageSound();
 		}
 
 		openNotification(msgObject);
@@ -98,6 +105,24 @@ function Chat() {
 		//openNotification(message);
 		
 		scrollToMessagesBottom();
+	}
+
+	this.playMessageSound = function () {
+		if (soundsEnabled) {
+			$.playSound(messageSound);
+		}
+	}
+
+	this.playJoinSound = function () {
+		if (soundsEnabled) {
+			$.playSound(joinSound);
+		}
+	}
+
+	this.playLeaveSound = function () {
+		if (soundsEnabled) {
+			$.playSound(leaveSound);
+		}
 	}
 }
 
@@ -151,17 +176,24 @@ $(document).ready(function() {
 		});
 	}
 
+	$.extend({
+		playSound: function(){
+			$('.playSound').remove();
+			return $('<audio autoplay class="playSound"><source src="'+arguments[0][0]+'" type="audio/mpeg"><source src="'+arguments[0][1]+'" type="audio/ogg"><embed height="50" width="100" src="'+arguments[0]+'"><embed src="'+arguments[0]+'"" hidden="true" autostart="true" loop="false" class="playSound"></audio>').appendTo('body');
+		}
+	});
+
 	$.easing.custom = function (x, t, b, c, d) {
-        if ((t/=d) < (1/2.75)) {
-            return c*(7.5625*t*t) + b;
-        } else if (t < (2/2.75)) {
-            return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-        } else if (t < (2.5/2.75)) {
-            return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-        } else {
-            return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
-        }
-    }
+		if ((t/=d) < (1/2.75)) {
+			return c*(7.5625*t*t) + b;
+		} else if (t < (2/2.75)) {
+			return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+		} else if (t < (2.5/2.75)) {
+			return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+		} else {
+			return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+		}
+	}
 
 	var currentUsers;
 
@@ -276,7 +308,7 @@ $(document).ready(function() {
 	}
 
 	// Hide modal window on click
-	$('.modalbg, .innermodal .close').on('click', function() {
+	$('.initial-options .modalbg, .initial-options .innermodal .close').on('click', function() {
 		closeMenu();
 	});
 
@@ -377,9 +409,9 @@ $(document).ready(function() {
 		openMenu();
 	});
 
-	$('body').on('dblclick', '.user<?=$user->get_id()?>', function(e) {
+	function editName(e) {
 		e.preventDefault();
-		var usernameDiv = $(this);
+		var usernameDiv = $('.user<?=$user->get_id()?>');
 		usernameDiv.parent().addClass('editing');
 		usernameDiv.html('<input type="text" class="nameText">');
 		var input = usernameDiv.children('input');
@@ -389,8 +421,11 @@ $(document).ready(function() {
 			usernameDiv.html(name);
 			input.off('blur');
 		});
-	});
+	}
 
+	$('body').on('dblclick', '.user<?=$user->get_id()?>', editName);
+	$('body').on('click', '.currentuser .edit', editName);
+	
 	$('#userDiv .heading').on('click', function() {
 		// show/hide users
 	});
@@ -425,15 +460,15 @@ $(document).ready(function() {
 	}
 
 	function openMenu() {
-		$('.modaloptions').fadeIn(250, function() {
-			$('.innermodal').fadeIn(250);
-			$('.modaloptions .nameText').focus();
+		$('.initial-options').fadeIn(250, function() {
+			$('.initial-options .innermodal').fadeIn(250);
+			$('.initial-options .nameText').focus();
 		});
 	}
 
 	function closeMenu() {
-		$('.innermodal').fadeOut(250, function() {
-			$('.modaloptions').fadeOut(250);
+		$('.initial-options .innermodal').fadeOut(250, function() {
+			$('.initial-options').fadeOut(250);
 		});
 	}
 
@@ -499,6 +534,7 @@ $(document).ready(function() {
 				var userDom = $('<li><span class="name user' + value.id + '">' + value.name + '</span><span  id="user' + value.id + '" class="message-icon no-select"></span></li>');
 				if (value.id == <?=$user->get_id()?>) {
 					userDom.addClass('currentuser');
+					userDom.append($('<span class="icon edit"></span>'));
 				}
 				$("#userList").append(userDom);
 				usersListRefresh();
@@ -526,6 +562,7 @@ $(document).ready(function() {
 				if (newUsers.filter(function (user) { return user.id == oldUsers[i].id}).length === 0) {
 					var msg = "<span class=\"name\">" + oldUsers[i].name + "</span> has left the chat.</span>";					
 					chat.addSystemMessage(msg);
+					chat.playLeaveSound();
 				}
 			}
 		} else if (oldUsers.length < newUsers.length) {
@@ -533,6 +570,7 @@ $(document).ready(function() {
 				if (oldUsers.filter(function (user) { return user.id == newUsers[i].id}).length === 0) {
 					var msg = "<span class=\"name\">" + newUsers[i].name + "</span> has joined the chat.</span>";					
 					chat.addSystemMessage(msg);
+					chat.playJoinSound();
 				}
 			}
 		}

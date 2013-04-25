@@ -14,6 +14,7 @@
 <script type="text/javascript" src="//use.typekit.net/abx5xxl.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <script src="/public/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="/public/scripts/jquery.scrollTo.js" type="text/javascript"></script>
 <script src="/public/scripts/jquery.cookie.js" type="text/javascript"></script>
 <script src="/public/scripts/blackbird.js" type="text/javascript" ></script>
 <script src="/public/scripts/konami.js" type="text/javascript" ></script>

@@ -60,6 +60,31 @@ html, body {
   display: none;
 }
 
+.icon.users {
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  margin: 5px 5px -2px 0;
+  background: transparent url(/public/images/user.png) no-repeat center;
+}
+
+.icon.edit {
+  height: 16px;
+  width: 16px;
+  background: transparent url(/public/images/edit.png) no-repeat center;
+  margin: 0 0 -4px 5px;
+}
+.currentuser .icon.edit {
+  display: none;
+}
+.currentuser:hover .icon.edit {
+  display: inline-block;
+}
+
+.user-heading-text {
+  margin-right: 15px;
+}
+
 #userDiv .heading:hover {
   background-color: #e05453;
   background-image: -webkit-linear-gradient(top, #e05453, #db5050);
@@ -78,7 +103,7 @@ body {
   overflow: hidden
 }
 
-.modaloptions {
+.modal {
   position: absolute;
   top: 0;
   left: 0;
@@ -309,7 +334,8 @@ ul#userList .currentuser {
   max-width: 100%;
   padding: 10px;
   margin: 10px 0 3px;
-  box-shadow: 0 3px 10px #bbb;
+  box-shadow: 0 1px 3px rgba(0,0,0, 0.2);
+  border-radius: 5px;
 }
 .message .text .videoWrapper {
   position: relative;
@@ -334,7 +360,7 @@ ul#userList .currentuser {
 .currentuser .message-icon {
   background: transparent url(/public/images/message-icon-white.png) no-repeat center;
 }
-.editing .message-icon {
+.editing .message-icon, .editing .edit {
   display: none;
 }
 #userList .message-icon {
@@ -398,6 +424,7 @@ body.loading .ajaxmodal {
 }
 .message .text {
   display: block;
+  max-width: 1280px;
 }
 
 /* Content */
@@ -497,20 +524,6 @@ div.nameinput {
   display: block;
 }
 
-.options {
-  position: absolute;
-  right: 0;
-  top: 50px;
-  background-color: #54728c;
-  padding: 10px;
-  border-left: 1px solid #466176;
-  border-bottom: 1px solid #466176;
-  box-shadow: rgb(100,100,100) 0px 8px 15px -3px;
-  border-radius: 0 0 0 5px;
-  display: none;
-  z-index: 1;
-}
-
 /* Middle Pane */
 #middle {
   margin: 0;
@@ -591,7 +604,7 @@ div.form {
   display: table-cell;
   vertical-align: middle;
 }
-button, .button {
+button, .button, .icon.edit {
   cursor: pointer;
 }
 
@@ -690,3 +703,10 @@ button, .button {
     padding-bottom: 60px;
   }
 }
+
+/* Hide sound */
+.playSound {
+  position: absolute;
+}
+
+/* Animations */
