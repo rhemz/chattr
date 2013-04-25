@@ -360,7 +360,7 @@ ul#userList .currentuser {
 .currentuser .message-icon {
   background: transparent url(/public/images/message-icon-white.png) no-repeat center;
 }
-.editing .message-icon, .editing .edit {
+.editing .message-icon, .editing .edit, .editing.currentuser:hover .icon.edit {
   display: none;
 }
 #userList .message-icon {
@@ -710,3 +710,43 @@ button, .button, .icon.edit {
 }
 
 /* Animations */
+
+/* Options Menu */
+.options-menu {
+  background-color: #efece6;
+  position: absolute;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+  width: 280px;
+  padding: 20px;
+  top: 45px;
+  right: 5px;
+  z-index: 5;
+  display: none;
+}
+
+.options-menu input, .options-menu select {
+  float: right;
+}
+.options-menu div {
+  padding: 5px 0;
+}
+.options-menu .nameText {
+  margin-top: -4px;
+  width: auto;
+}
+.options-menu .options-submit {
+  width: 100%;
+  margin-top: 15px;
+}
+.notch {
+  position: absolute;
+  top: -20px;
+  right: 9px;
+  border-top: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #efece6;
+  width: 0;
+  height: 0;
+}

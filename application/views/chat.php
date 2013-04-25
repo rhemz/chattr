@@ -36,36 +36,49 @@
 		</div>
 	</div>
 
-	<div class="modal options">
-		<div class="modalbg"></div>
-		<div class="innermodal">
-			<div class="nameinput">
-			<input type="text" id="nameText" />
-			</div>
-			<div class="notification">
-				<input type="checkbox" id="html5notify" value="" />
-				<label for="html5notify">Enable Notifications</label>
-			</div>
-			<div class="feelingDangerous">
-				<input type="checkbox" id="feelingDangerous" value="" />
-				<label for="feelingDangerous">Allow Raw Messages</label>
-			</div>
-			<div>
-				Current theme: <?=$user->get_theme()?>
-			</div>
-			<div class="close"></div>
-			<div class="setusername">
-				<p>Set your <b>username</b> or leave blank to randomly generate one.</p>
-				<input type="text" class="nameText" />
-			</div>
-			<!-- <div>
-				<p>Current theme: <?=$user->get_theme()?></p>
-			</div> -->
-			<div class="enablenotifications">
-				<p>Click below to <b>enable</b> notifications</p>
-				<div role="button" id="notificationsButton" class="button">Enable Notifications</div>
-			</div>
+	<div class="options-menu">
+
+		<div class="notch"></div>
+		
+		<div class="change-name">
+			<span>Name:</span>
+			<input type="text" class="nameText" />
 		</div>
+		
+		<div class="notifications">
+			<span>HTML5 Notifications:</span>
+			<input type="checkbox" checked name="notifications" value="Enabled">
+		</div>
+		
+		<div class="raw-messages">
+			<span>Raw HTML messages:</span>
+			<input type="checkbox" checked name="rawmessages" value="Enabled">
+		</div>
+		
+		<div class="enable-animations">
+			<span>Animations:</span>
+			<input type="checkbox" checked name="animation" value="Enabled">
+		</div>
+		
+		<div class="embed-images">
+			<span>Image embedding:</span>
+			<input type="checkbox" checked name="images" value="Enabled">
+		</div>
+		
+		<div class="embed-video">
+			<span>Video embedding:</span>
+			<input type="checkbox" checked name="video" value="Enabled">
+		</div>
+		
+		<div class="change-theme">
+			<span>Theme:</span>
+			<select>
+				<option value="default">Default</option>
+			</select>
+		</div>
+
+		<div role="button" id="optionsSubmit" class="button options-submit">Finish</div>
+
 	</div>
 
 

@@ -3,14 +3,14 @@ $.fn.scrollTo = function( target, options, callback ){
   var settings = $.extend({
     scrollTarget  : target,
     offsetTop     : 50,
-    duration      : 500,
+    duration      : 200,
     easing        : 'swing'
   }, options);
   return this.each(function(){
     var scrollPane = $(this);
     var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
     var scrollY = (typeof scrollTarget == "number") ? scrollTarget : scrollTarget.offset().top + scrollPane.scrollTop() - parseInt(settings.offsetTop);
-    scrollPane.animate({scrollTop : scrollY }, parseInt(settings.duration), settings.easing, function(){
+      scrollPane.animate({scrollTop : scrollY }, { duration: parseInt(settings.duration), queue: false }, settings.easing, function(){
       if (typeof callback == 'function') { callback.call(this); }
     });
   });

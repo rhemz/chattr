@@ -129,7 +129,8 @@ function Chat() {
 function scrollToMessagesBottom() {
 	console.log($('#mainChat').scrollTop() + $('#mainChat').innerHeight() - $('#mainChat')[0].scrollHeight );
 	if ( Math.abs( $('#mainChat').scrollTop() + $('#mainChat').innerHeight() - $('#mainChat')[0].scrollHeight ) < 50) {
-		$('#mainChat').animate( { scrollTop: $('#mainChat')[0].scrollHeight }, { queue: false, duration: 600 });
+		$('#mainChat').scrollTo($('#mainChat').children().last());
+		//$('#mainChat').animate( { scrollTop: $('#mainChat')[0].scrollHeight }, { queue: false, duration: 600 });
 	}	
 }
 
@@ -482,7 +483,7 @@ $(document).ready(function() {
 		if(message.length > <?=$this->config->get('message.max_length')?>) {
 			chat.addSystemMessage('The maximum message length you can send is <?=$this->config->get('message.max_length')?> characters');
 		} else {
-			scrollToMessagesBottom();
+			//scrollToMessagesBottom();
 		}
 		
 		$.ajax({
