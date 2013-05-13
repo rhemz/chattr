@@ -99,7 +99,7 @@ class Validation
 		}
 		else
 		{
-			Logger::Log(sprintf("%s has already been registered for validation", $key), Log_Level::Warning);
+			Logger::Log(sprintf('%s has already been registered for validation', $key), Log_Level::Warning);
 		}
 
 		return $this;
@@ -194,7 +194,7 @@ class Validation
 	*/
 	public function message($key, $prefix = null, $suffix = null)
 	{
-		return isset($this->messages[$key]) ? sprintf("%s%s%s", $prefix, $this->messages[$key], $suffix) : null;
+		return isset($this->messages[$key]) ? sprintf('%s%s%s', $prefix, $this->messages[$key], $suffix) : null;
 	}
 
 
@@ -503,7 +503,7 @@ class Validation
 			return true;
 		}
 
-		Logger::log(sprintf("Validation callback function %s was not found", $callback), Log_Level::Error);
+		Logger::log(sprintf('Validation callback function %s was not found', $callback), Log_Level::Error);
 		return false;
 	}
 }

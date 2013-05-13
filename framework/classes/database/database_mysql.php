@@ -9,7 +9,7 @@ class Database_MySQL extends Database_Base
 	public function __construct($config)
 	{
 		$this->port = is_null($config['port']) ? self::Default_Port : $config['port'];
-		$this->host = sprintf("%s:%s", $config['hostname'], $this->port);
+		$this->host = sprintf('%s:%s', $config['hostname'], $this->port);
 		$this->user = $config['username'];
 		$this->password = $config['password'];
 		$this->database = $config['database'];
@@ -28,7 +28,7 @@ class Database_MySQL extends Database_Base
 
 		if(!mysql_select_db($this->database, $this->conn))
 		{
-			throw new Database_Selection_Exception(sprintf("Could not use the specified MySQL database (%s) on %s", $this->database, $this->host));
+			throw new Database_Selection_Exception(sprintf('Could not use the specified MySQL database (%s) on %s', $this->database, $this->host));
 		}
 
 		if($this->unicode)

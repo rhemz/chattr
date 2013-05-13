@@ -8,12 +8,12 @@ abstract class Enum
 	}
 
 
-	public static function toString($val)
+	public static function to_string($val)
 	{
 		$r = new ReflectionClass(get_called_class());
 		$constants = array_flip($r->getConstants());
 
 		return $constants[$val];
-
 	}
+	
 }

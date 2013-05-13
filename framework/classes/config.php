@@ -27,8 +27,6 @@ class Config
 	{
 		$this->framework_config = FRAMEWORK_PATH . self::Config_Dir . DIRECTORY_SEPARATOR . '%s' . PHP_EXT;
 		$this->application_config = APPLICATION_PATH . self::Config_Dir . DIRECTORY_SEPARATOR . '%s' . PHP_EXT;
-
-		$this->load('global');
 	}
 
 
@@ -49,13 +47,17 @@ class Config
 	* Load any number of configuration files.  If an application configuration file is not present, the corresponding
 	* framework config will be loaded.  If that does not exist, an error is thrown.
 	* @param string|Array $files Config file(s)
+	* @param Environment $env Optionally override the default environment-config selection process
 	* @throws Config_Not_Found_Exception
 	* @throws Config_Malformed_Exception
 	*/
-	public function load($files)
+	public function load($files, $env = null)
 	{
 		/*
 			1. Determine paths to file
+				-if $env = Environment::None, set path to to /config/file
+				-if /config/$env||ENVIRONMENT/file exists, set path to that
+				-otherwise set path to /config/file 
 			2. If application config exists
 				-attempt to load corresponding framework config
 				-any values present in framework config should be overridden with application values
@@ -73,7 +75,11 @@ class Config
 		{
 			if(isset($this->config[$file])) continue;
 
-			$ac = sprintf($this->application_config, $file);
+			$ac = (!is_null($env) && $env == Environment::None) ? sprintf($this->application_config, $file) : (defined('ENVIRONMENT')
+				&& file_exists($p = sprintf($this->application_config, strtolower(Environment::to_string((!is_null($env) ? $env : ENVIRONMENT))) . DIRECTORY_SEPARATOR . $file))
+				? $p
+				: sprintf($this->application_config, $file));
+				
 			$fc = sprintf($this->framework_config, $file);
 			
 			try
@@ -106,6 +112,8 @@ class Config
 				Logger::log($cme->getMessage(), Log_Level::Error);
 			}
 		}
+
+		return self::$instance;
 	}
 
 
@@ -128,7 +136,7 @@ class Config
 		}
 
 		// if smart config loading is enabled in application config, config files don't have to be loaded before being queried
-		if($this->config['global']['smart_config_loading'] && !isset($this->config[$parts[0]]))
+		if(isset($this->config['global']['smart_config_loading']) && $this->config['global']['smart_config_loading'] && !isset($this->config[$parts[0]]))
 		{
 			$this->load($parts[0]);
 		}

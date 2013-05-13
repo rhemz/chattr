@@ -6,7 +6,9 @@
 */
 class Environment extends Enum
 {
+	const None = 0; // only here to allow for loading of config files in base directory in fringe-cases
 	const Development = 1;
-	const Staging = 10;
-	const Production = 20;
+	const Staging = 2;
+	const Testing = 4;
+	const Production = 8;
 }

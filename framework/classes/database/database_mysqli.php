@@ -9,7 +9,7 @@ class Database_MySQLi extends Database_Base
 	public function __construct($config)
 	{
 		$this->port = is_null($config['port']) ? self::Default_Port : $config['port'];
-		$this->host = sprintf("%s:%s", $config['hostname'], $this->port);
+		$this->host = sprintf('%s:%s', $config['hostname'], $this->port);
 		$this->user = $config['username'];
 		$this->password = $config['password'];
 		$this->database = $config['database'];
@@ -55,7 +55,7 @@ class Database_MySQLi extends Database_Base
 		{
 			if(!$stmt = $this->conn->prepare($sql))
 			{
-				Logger::log(sprintf("Error preparing statement: %s", $this->conn->error), Log_Level::Error);
+				Logger::log(sprintf('Error preparing statement: %s', $this->conn->error), Log_Level::Error);
 			}
 
 			$bind_datatypes = '';

@@ -27,7 +27,7 @@ class Logger
 		{
 			$level == Log_Level::Error
 				? get_mvc()->load_view('error', array('message' => $message))
-				: print(sprintf("%s %s %s %s", PHP_EOL, $message, (self::$config['print_html'] ? '<br />' : null), PHP_EOL));
+				: print(sprintf('%s %s %s %s', PHP_EOL, $message, (self::$config['print_html'] ? '<br />' : null), PHP_EOL));
 			
 		}
 
@@ -62,7 +62,7 @@ class Logger
 			}
 
 			$handle = fopen(LOG_PATH . DIRECTORY_SEPARATOR . $file, self::Write_Mode);
-			fwrite($handle, sprintf("%s: %s%s", date(DATE_RFC822), $message, PHP_EOL));
+			fwrite($handle, sprintf('%s: %s%s', date(DATE_RFC822), $message, PHP_EOL));
 			fclose($handle);
 		}
 	}
@@ -76,6 +76,18 @@ class Logger
 	{
 		echo '<pre>';
 		print_r($object);
+		echo '</pre>';
+	}
+
+
+	/**
+	* Simple convenience method for wrapping var_dump output in <pre> tags if a debugger is not available.
+	* @param mixed $object The variable to dump.
+	*/
+	public static function var_dump($object)
+	{
+		echo '<pre>';
+		var_dump($this);
 		echo '</pre>';
 	}
 

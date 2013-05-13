@@ -23,7 +23,7 @@
 	<div class="errorBox">
 
 		<p>
-			Whoops, something broke in <b><?=$error['file']?></b> on line <b><?=$error['line']?></b>.  
+			Whoops, something broke in <b><?php echo $error['file'] ?></b> on line <b><?php echo $error['line'] ?></b>.  
 		</p>
 
 		<?php
@@ -48,8 +48,8 @@
 		?>
 
 		<ul>
-			<li><b>Type:</b> <?=$type?></li>
-			<li><b>Message:</b> <?=$error['message']?></li>
+			<li><b>Type:</b> <?php echo $type ?></li>
+			<li><b>Message:</b> <?php echo $error['message'] ?></li>
 		</ul>
 
 	</div>

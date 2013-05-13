@@ -72,7 +72,7 @@ class Router
 
 			if(is_file($this->controller_base . $segment . PHP_EXT))
 			{
-				$this->controller_name = sprintf("%s_%s", $segment, $this->config->get('paths.controller_suffix'));
+				$this->controller_name = sprintf('%s_%s', $segment, $this->config->get('paths.controller_suffix'));
 				$this->controller = new $this->controller_name();
 
 				$this->action = ++$this->index == sizeof($this->path)

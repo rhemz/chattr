@@ -26,7 +26,7 @@ class Model
 			Logger::log('No database configuration is present', Log_Level::Error);
 		}
 
-		$type = sprintf("%s_%s", self::Driver_Prefix, $type);
+		$type = sprintf('%s_%s', self::Driver_Prefix, $type);
 		// now a singleton to avoid multiple connections
 		$this->db_object =& $type::get_instance($type, $config->get('database.*')); //new $type($config->get('database.*'));
 

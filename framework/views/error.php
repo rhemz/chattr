@@ -23,7 +23,7 @@
 	<div class="errorBox">
 
 		<p>
-			<?=$message?>
+			<?php echo $message ?>
 		</p>
 
 	</div>

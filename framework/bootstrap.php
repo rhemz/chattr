@@ -1,16 +1,24 @@
 <?php
 
-// load base mvc exception, configuration class, and autoloader
+// load base mvc exception, configuration class, environments enum, and autoloader
 require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'rz_mvc_exception' . PHP_EXT);
 require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'config' . PHP_EXT);
+require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'enum' . PHP_EXT);
+require_once(FRAMEWORK_PATH . 'classes' . DIRECTORY_SEPARATOR . 'enum' . DIRECTORY_SEPARATOR . 'environment' . PHP_EXT);
 require_once(FRAMEWORK_PATH . 'autoload' . PHP_EXT);
 
-$loader =& Autoload::get_instance();
-$loader->register();
+// determine operating environment.  ideally determined in the user's .htaccess but can fall back to config files
+$e = isset($_SERVER['ENVIRONMENT']) && !is_null($e = @constant('Environment::' . $_SERVER['ENVIRONMENT']))
+	? $e
+	: Config::get_instance()->load('environment')->get('environment.environment');
+define('ENVIRONMENT', $e);
+
+// register class autoloader
+Autoload::get_instance()->register();
 
 // load core framework and application configs
 $config =& Config::get_instance();
-$config->load(array('routes', 'environment', 'logging', 'session'));
+$config->load(array('global', 'routes', 'logging', 'session'));
 
 // register custom shutdown and error handler hooks
 if($config->get('global.framework_handle_fatal_errors'))
@@ -19,20 +27,12 @@ if($config->get('global.framework_handle_fatal_errors'))
 	ini_set('display_errors', 0);
 }
 
-// check for existance of application environment config file
-if(!$config->user_config_exists('environment'))
-{
-	Logger::log('No application environment setting present, falling back to framework default', Log_Level::Warning);
-}
-
-// set operating environment
-define('ENVIRONMENT', $config->get('environment.environment'));
-
 // prepare URI and startup Router
 $uri = rtrim(preg_replace('/\?(.*)/', '', $_SERVER['REQUEST_URI']), '/');
 
 $router = new Router($uri);
 
+// find the route or die trying!
 $router->check_route()
 	? $router->execute_route()
 	: $router->show_404();

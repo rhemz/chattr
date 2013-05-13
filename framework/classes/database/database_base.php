@@ -115,11 +115,11 @@ class Database_Connection_Exception extends Rz_MVC_Exception
 {
 	public function __construct($type, $host, $port, $user, $pass)
 	{ 
-		$msg = sprintf("Unable to connect to %s server ", $type);
+		$msg = sprintf('Unable to connect to %s server ', $type);
 
 		$msg .= ENVIRONMENT == Environment::Development
-			? sprintf("(%s) on port %d with credentials %s/%s", $host, $port, $user, $pass)
-			: "using the supplied settings";
+			? sprintf('(%s) on port %d with credentials %s/%s', $host, $port, $user, $pass)
+			: 'using the supplied settings';
 
 		parent::__construct($msg);
 	}

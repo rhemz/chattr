@@ -13,7 +13,7 @@ class Controller_Rest extends Rz_Mvc
 	{
 		parent::__construct();
 
-		$this->method_prefix = sprintf("%s_", Input::request_method());
+		$this->method_prefix = sprintf('%s_', Input::request_method());
 	}
 
 	
@@ -26,7 +26,7 @@ class Controller_Rest extends Rz_Mvc
 		$rc = new ReflectionClass($this);
 
 		// find function by http method
-		return $rc->hasMethod(sprintf("%s%s", $this->method_prefix, $method));
+		return $rc->hasMethod(sprintf('%s%s', $this->method_prefix, $method));
 	}
 
 
@@ -38,7 +38,7 @@ class Controller_Rest extends Rz_Mvc
 	*/
 	public function __call($method, $args)
 	{
-		$method = sprintf("%s%s", $this->method_prefix, $method);
+		$method = sprintf('%s%s', $this->method_prefix, $method);
 
 		sizeof($args)
 			? call_user_func_array(array($this, $method), $args)

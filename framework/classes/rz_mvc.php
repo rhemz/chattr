@@ -25,7 +25,7 @@ class Rz_MVC
 
 		// setup session.  if session is disabled, create a default file session object with checks
 		// against config to give accurate feedback if they try using the session object with sessions disabled
-		$session_type = sprintf("%s_%s", self::Session_Driver_Prefix, 
+		$session_type = sprintf('%s_%s', self::Session_Driver_Prefix, 
 			($this->config->get('session.use_session') ? $this->config->get('session.type') : 'file'));
 		$this->session = new $session_type();
 	}
@@ -55,7 +55,7 @@ class Rz_MVC
 				return;
 			}
 		}
-		Logger::log(sprintf("%s view cannot be found", $view), Log_Level::Error);
+		Logger::log(sprintf('%s view cannot be found', $view), Log_Level::Error);
 	}
 
 
