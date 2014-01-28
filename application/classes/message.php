@@ -21,7 +21,7 @@ class Message
 
 	public function sanitize()
 	{
-		$this->text = htmlentities($this->text);
+		$this->text = nl2br(htmlentities($this->text));
 	}
 
 
